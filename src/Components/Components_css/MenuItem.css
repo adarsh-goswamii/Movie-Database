@@ -1,0 +1,116 @@
+@font-face {
+    font-family: Lemon;
+    src: url(../../fonts/Lemon\ Tuesday.otf);
+}
+
+@font-face {
+    font-family: Segoe;
+    src: url(../../fonts/Segoe\ UI.ttf);
+}
+
+@font-face {
+    font-family: SegoeBold;
+    src: url(../../fonts/Segoe\ UI\ Bold.ttf);
+}
+
+* {
+    --linear: linear-gradient(to bottom left, #43C6AC, #00072D);
+    --orange: #FF8811;
+    --white: #FFFFFF;
+    --black: #000000;
+    --grey-light: #DDD;
+    --grey-dark: #323232;
+    --black-film: rgba(0, 0, 0, 0.7); 
+    --primary: #00072D;
+
+    margin: 0;
+    padding: 0;
+}
+
+.menuitem {
+    
+}
+
+.menuitem__title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: inline-block;
+    color: var(--white);
+    font-family: SegoeBold;
+}
+
+.menuitem__submenu {
+    margin-top: 1rem;
+    padding: .5rem 0rem;
+    position: relative;
+    background-color: var(--white);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    width: 10rem;
+    border-radius: .5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    visibility: hidden;
+    pointer-events: none;
+    position: absolute;
+}
+
+.menuitem__submenu--active {
+    visibility: visible;
+    pointer-events: all;
+    position: relative;
+}
+
+.menuitem__submenu::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -10px;
+    left: 20%;
+    background-color: var(--white);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    transform: rotate(45deg);
+    z-index: -1;
+}
+
+.menuitem__submenu__item {
+    font-family: Segoe;
+    padding: .5rem;
+    cursor: pointer;
+    transition: all .7s ease;
+    position: relative;
+}
+
+.menuitem__submenu__item:hover {
+    background-color: #ffffff;
+    background-image: var(--linear);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
+}
+
+.menuitem__submenu__item:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    height: 1.5px;
+    width: 0px;
+    transition: .5s ease;
+}
+
+.menuitem__submenu__item:hover:after {
+    content: "";
+    background: var(--linear);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 1.5px;
+    width: 120%;
+}

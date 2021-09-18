@@ -1,0 +1,70 @@
+@font-face {
+    font-family: Lemon;
+    src: url(../../fonts/Lemon\ Tuesday.otf);
+}
+
+@font-face {
+    font-family: Segoe;
+    src: url(../../fonts/Segoe\ UI.ttf);
+}
+
+@font-face {
+    font-family: SegoeBold;
+    src: url(../../fonts/Segoe\ UI\ Bold.ttf);
+}
+
+* {
+    --linear: linear-gradient(to bottom left, #43C6AC, #00072D);
+    --orange: #FF8811;
+    --white: #FFFFFF;
+    --black: #000000;
+    --grey-light: #DDD;
+    --grey-dark: #323232;
+    --black-film: rgba(0, 0, 0, 0.7); 
+    --primary: #00072D;
+
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    padding: 0rem 2rem;
+    height: 4rem;
+    background: var(--linear);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header__logo {
+    display: flex;
+    justify-content: flex-start;
+    width: 20%;
+}
+
+.header__menu {
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__tab {
+    display: flex;
+    width: 40%;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.header__tab__avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1rem;
+    background-color: var(--white);
+}
+
+.header__tab__searchIcon {
+    transform: scale(1.2);
+    color: var(--white);
+    margin-right: 2rem;
+}
