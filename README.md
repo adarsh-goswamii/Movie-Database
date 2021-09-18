@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+###### UI Design (Figma link): https://www.figma.com/file/YahyZqk1w5GaZeS8IgEm8n/Untitled?node-id=0%3A1
 
 ## Available Scripts
 
