@@ -1,18 +1,3 @@
-@font-face {
-    font-family: Lemon;
-    src: url(../../fonts/Lemon\ Tuesday.otf);
-}
-
-* {
-    --linear: linear-gradient(to bottom left, #43C6AC, #00072D);
-    --orange: #FF8811;
-    --white: #FFFFFF;
-    --black: #000000;
-    --grey-light: #DDD;
-    --grey-dark: #323232;
-    --black-film: rgba(0, 0, 0, 0.7); 
-}
-
 .logo {
     display: flex;
     justify-content: flex-start;

@@ -23,46 +23,46 @@ const Footer = () => {
                     </p>
                 </div>
                 <div className="footer__column-one__social-handles">
-                    <InstagramIcon className="social-handles__instagram-icon" />
-                    <LinkedInIcon className="social-handles__linkedin-icon" />
-                    <GitHubIcon className="social-handles__github-icon" />
+                    <a href="https://www.instagram.com/adarsh010120/"><InstagramIcon className="social-handles__instagram-icon" /></a>
+                    <a href="https://www.linkedin.com/in/adarsh-goswami/"><LinkedInIcon className="social-handles__linkedin-icon" /></a>
+                    <a href="https://github.com/Adarsh-Goswamii"><GitHubIcon className="social-handles__github-icon" /></a>
                 </div>
             </div>
 
             <div className="footer__column-two">
-                <h3 className="footer_column-two__title">The Basics</h3>
-                <p className="footer_column-two__subheading-1">About TMBD</p>
-                <p className="footer_column-two__subheading-2">Contact Us</p>
-                <p className="footer_column-two__subheading-3">Support Forums</p>
-                <p className="footer_column-two__subheading-4">API</p>
-                <p className="footer_column-two__subheading-5">System Status</p>
+                <h3 className="footer__column-two__title">The Basics</h3>
+                <p className="footer__column-two__subheading-1">About TMBD</p>
+                <p className="footer__column-two__subheading-2">Contact Us</p>
+                <p className="footer__column-two__subheading-3">Support Forums</p>
+                <p className="footer__column-two__subheading-4">API</p>
+                <p className="footer__column-two__subheading-5">System Status</p>
             </div>
 
             <div className="footer__column-three">
-                <h3 className="footer_column-three__title">The Basics</h3>
-                <p className="footer_column-three__subheading-1">About TMBD</p>
-                <p className="footer_column-three__subheading-2">Contact Us</p>
-                <p className="footer_column-three__subheading-3">Support Forums</p>
-                <p className="footer_column-three__subheading-4">API</p>
-                <p className="footer_column-three__subheading-5">System Status</p>
+                <h3 className="footer__column-three__title">The Basics</h3>
+                <p className="footer__column-three__subheading-1">About TMBD</p>
+                <p className="footer__column-three__subheading-2">Contact Us</p>
+                <p className="footer__column-three__subheading-3">Support Forums</p>
+                <p className="footer__column-three__subheading-4">API</p>
+                <p className="footer__column-three__subheading-5">System Status</p>
             </div>
 
             <div className="footer__column-four">
-                <h3 className="footer_column-four__title">The Basics</h3>
-                <p className="footer_column-four__subheading-1">About TMBD</p>
-                <p className="footer_column-four__subheading-2">Contact Us</p>
-                <p className="footer_column-four__subheading-3">Support Forums</p>
-                <p className="footer_column-four__subheading-4">API</p>
-                <p className="footer_column-four__subheading-5">System Status</p>
+                <h3 className="footer__column-four__title">The Basics</h3>
+                <p className="footer__column-four__subheading-1">About TMBD</p>
+                <p className="footer__column-four__subheading-2">Contact Us</p>
+                <p className="footer__column-four__subheading-3">Support Forums</p>
+                <p className="footer__column-four__subheading-4">API</p>
+                <p className="footer__column-four__subheading-5">System Status</p>
             </div>
 
             <div className="footer__column-five">
-                <h3 className="footer_column-five__title">The Basics</h3>
-                <p className="footer_column-five__subheading-1">About TMBD</p>
-                <p className="footer_column-five__subheading-2">Contact Us</p>
-                <p className="footer_column-five__subheading-3">Support Forums</p>
-                <p className="footer_column-five__subheading-4">API</p>
-                <p className="footer_column-five__subheading-5">System Status</p>
+                <h3 className="footer__column-five__title">The Basics</h3>
+                <p className="footer__column-five__subheading-1">About TMBD</p>
+                <p className="footer__column-five__subheading-2">Contact Us</p>
+                <p className="footer__column-five__subheading-3">Support Forums</p>
+                <p className="footer__column-five__subheading-4">API</p>
+                <p className="footer__column-five__subheading-5">System Status</p>
             </div>
 
         </footer>

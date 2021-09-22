@@ -19,7 +19,7 @@ const MenuItem= (props)=> {
                 props.submenu.map((i)=> {
                     return (
                         // TODO: Add link tags according to the provided item.
-                        <p className="menuitem__submenu__item">
+                        <p className="menuitem__submenu__item" key={i}>
                         {i}
                         </p>
                     );

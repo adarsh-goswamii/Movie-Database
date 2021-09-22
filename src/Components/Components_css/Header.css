@@ -1,32 +1,3 @@
-@font-face {
-    font-family: Lemon;
-    src: url(../../fonts/Lemon\ Tuesday.otf);
-}
-
-@font-face {
-    font-family: Segoe;
-    src: url(../../fonts/Segoe\ UI.ttf);
-}
-
-@font-face {
-    font-family: SegoeBold;
-    src: url(../../fonts/Segoe\ UI\ Bold.ttf);
-}
-
-* {
-    --linear: linear-gradient(to bottom left, #43C6AC, #00072D);
-    --orange: #FF8811;
-    --white: #FFFFFF;
-    --black: #000000;
-    --grey-light: #DDD;
-    --grey-dark: #323232;
-    --black-film: rgba(0, 0, 0, 0.7); 
-    --primary: #00072D;
-
-    margin: 0;
-    padding: 0;
-}
-
 .header {
     padding: 0rem 2rem;
     height: 4rem;

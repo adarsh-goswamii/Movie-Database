@@ -1,45 +1,16 @@
-@font-face {
-    font-family: Lemon;
-    src: url(../../fonts/Lemon\ Tuesday.otf);
-}
 
-@font-face {
-    font-family: Segoe;
-    src: url(../../fonts/Segoe\ UI.ttf);
-}
-
-@font-face {
-    font-family: SegoeBold;
-    src: url(../../fonts/Segoe\ UI\ Bold.ttf);
-}
-
-* {
-    --linear: linear-gradient(to bottom left, #43C6AC, #00072D);
-    --orange: #FF8811;
-    --white: #FFFFFF;
-    --black: #000000;
-    --grey-light: #DDD;
-    --grey-dark: #323232;
-    --black-film: rgba(0, 0, 0, 0.7); 
-    --primary: #00072D;
-
-    margin: 0;
-    padding: 0;
-}
-
-h3 {
+/* h3 {
     font-size: 1.2rem;
     font-family: SegoeBold;
 }
 
 p {
     font-size: 1rem;
-}
+} */
 
 .footer {
     width: 100%;
-    height: 10rem;
-    padding: 1.5rem 2rem;
+    padding: 2.5rem 2rem;
     background: var(--linear);
     display: grid;
     grid-template-columns: 1.5fr repeat(4, 1fr);
@@ -88,4 +59,11 @@ p {
 .social-handles__linkedin-icon:hover, 
 .social-handles__instagram-icon:hover {
     color: var(--white)
+} 
+ 
+.footer__column-two__title, 
+.footer__column-three__title, 
+.footer__column-four__title, 
+.footer__column-five__title {
+    font-family: SegoeBold;
 } 
