@@ -4,7 +4,7 @@ import './Components_css/Toggle.css';
 const Toggle = (props) => {
 
     return (
-        <div class="toggle">
+        <div className="toggle">
             <label className="toggle__label" htmlFor="checkbox">
             <input
                 type="checkbox"
