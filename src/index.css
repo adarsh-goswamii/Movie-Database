@@ -30,6 +30,7 @@
 
 body {
     box-sizing: border-box;
+    font-family: Segoe;
 }
 
 .play-video--active {

@@ -1,5 +1,6 @@
 .toggle {
     position: relative;
+    display: inline-block;
 }
 .toggle__label {
     display: inline-block; 

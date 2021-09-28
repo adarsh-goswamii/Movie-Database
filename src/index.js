@@ -4,7 +4,8 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Poster from './Components/Poster';
 import Toggle from './Components/Toggle';
-import Trailer_card from './Components/Trailer_card';
+import Trailer from './Components/Trailer';
+import Slider from './Components/Slider';
 import './index.css';
 
 const API_key = 'd370300724b5dd3d75a44a46e93256c2';
@@ -13,7 +14,7 @@ const Index = () => {
     const [playState, setPlayState] = useState("");
     const [url, setUrl] = useState("");
     function playVideo(link, state) {
-        // link = "https://www.youtube.com/embed/jK2VROKKTSQ";
+        link = "https://www.youtube.com/embed/jK2VROKKTSQ";
         setUrl(link);
         setPlayState(state);
     }
@@ -34,8 +35,7 @@ const Index = () => {
             <div className={playState== 'visible'? "wrapper--hidden": "wrapper"}>
                 <Header />
                 <Poster api_key={API_key} image_url={image_url} />
-                <Toggle options={["In Threatre", "Popular"]} />
-                <Trailer_card play_video={playVideo} />
+                <Trailer play_video={playVideo} />
                 <Footer />
             </div>
         </>
