@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Components_css/Toggle.css';
 
 const Toggle = (props) => {
+    console.log(props.click);
 
     return (
         <div className="toggle">
@@ -9,6 +10,7 @@ const Toggle = (props) => {
             <input
                 type="checkbox"
                 className="toggle__label__checkbox"
+                onClick={props.click}
                 id="checkbox" />
                 <span className="toggle__label__span">
                     <h3 className="toggle__label__span__option1">

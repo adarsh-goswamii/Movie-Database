@@ -21,7 +21,7 @@
 }
 
 .trailer::after {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     z-index: -2;
     content: '';
     position: absolute;

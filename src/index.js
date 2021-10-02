@@ -19,9 +19,19 @@ const Index = () => {
         setPlayState(state);
     }
 
+    function handleClick(e) {
+        let target = e.target;
+        if (target != null && target.classList.contains("play-video--active")) {
+            setPlayState("not visible");
+            // ! Stop the youtube player.
+        }
+    }
+
     return (
         <>
-            <div className={playState == 'visible' ? `play-video--active` : "play-video"}>
+            <div
+                onClick={handleClick}
+                className={playState == 'visible' ? `play-video--active` : "play-video"}>
                 <iframe
                     className="play-video__player"
                     width="560"
@@ -32,11 +42,11 @@ const Index = () => {
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen></iframe>
             </div>
-            <div className={playState== 'visible'? "wrapper--hidden": "wrapper"}>
+            <div className={playState == 'visible' ? "wrapper--hidden" : "wrapper"}>
                 <Header />
                 <Poster api_key={API_key} image_url={image_url} />
-                <Trailer 
-                    api_key={API_key} 
+                <Trailer
+                    api_key={API_key}
                     play_video={playVideo}
                     image_url={image_url} />
                 <Footer />

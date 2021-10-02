@@ -7,9 +7,9 @@ import './Components_css/Trailer.css';
 const Trailer = (props) => {
     let i = 0;
     let temp_popular = {};
-    const [checked, setChecked] = useState('unchecked');
+    const [checked, setChecked] = useState(true);
     const [theatre, setTheatre] = useState({ loading: true, data: [] });
-    // const [popular, setPopular] = useState({});
+    const [popular, setPopular] = useState({ loading: true, data: [] });
 
     useEffect(() => {
         function get_theatre_movies() {
@@ -22,6 +22,7 @@ const Trailer = (props) => {
                         // console.log("Got the result from getVideos", video_path);
                         const temp = {
                             id: movie.id,
+                            movie_name: movie.title,
                             backdrop_path: movie.backdrop_path,
                             video_path: video_path
                         };
@@ -35,7 +36,31 @@ const Trailer = (props) => {
                 });
         }
 
+        function get_popular_movies() {
+            fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${props.api_key}&page=1`)
+                .then(data => data.json())
+                .then(({ results }) => {
+                    results.map(async (movie) => {
+                        // console.log("map iteration started");
+                        let video_path = await getVideos(movie.id);
+                        // console.log("Got the result from getVideos", video_path);
+                        const temp = {
+                            id: movie.id,
+                            backdrop_path: movie.backdrop_path,
+                            video_path: video_path
+                        };
+
+                        // console.log("temp", temp);
+                        setPopular(({ data }) => {
+                            // console.log("data", data);
+                            return { loading: false, data: [...data, temp] }
+                        });
+                    });
+                });
+        }
+
         get_theatre_movies();
+        get_popular_movies();
     }, []);
 
     // * Now when we have the movies id we can search for videos that where released on youtube.
@@ -61,40 +86,73 @@ const Trailer = (props) => {
     let poster = theatre.data.length > 0 ?
         `${props.image_url}${theatre.data[0].backdrop_path}` :
         "https://c4.wallpaperflare.com/wallpaper/308/457/73/penguins-of-madagascar-funny-movie-wallpaper-preview.jpg";
-
     poster = `url("${poster}")`;
+
+    let poster2 = popular.data.length > 0 ?
+        `${props.image_url}${popular.data[0].backdrop_path}` :
+        "https://c4.wallpaperflare.com/wallpaper/308/457/73/penguins-of-madagascar-funny-movie-wallpaper-preview.jpg";
+    poster2 = `url("${poster2}")`;
+
     console.log(poster);
     const someStyle = {
-        "--img-url": poster
+        "--img-url": checked? poster: poster2
     }
+
+    function handleState() {
+        console.log("Change State");
+        if(checked) setChecked(false);
+        else setChecked(true);
+    }
+
+    console.log(theatre.data);
 
     return (
         <section
-            style={ someStyle }
+            style={someStyle}
             className="trailer">
             <div className="trailer__head">
                 <h3 className="trailer__heading">Latest Trailers</h3>
                 <Toggle
+                    click={handleState}
                     className="trailer__toggle"
-                    options={["In Threatres", "Television"]} />
+                    options={["In Threatres", "Trending"]} />
             </div>
-            <Slider>
+            <Slider >
                 {
-                    theatre.loading == true ? <p> LOADING </p> :
-                        theatre.data.map(({ id: key, backdrop_path, video_path }) => {
-                            return (
-                                <div
-                                    key={key}
-                                    className="slider__container__card">
-                                    <Trailer_card
-                                        id={key}
-                                        link={video_path}
-                                        play_video={props.play_video}
-                                        image_url={`${props.image_url}${backdrop_path}`}
-                                    />
-                                </div>
-                            );
-                        })
+                    checked == true ?
+                        theatre.loading == true ? <p> LOADING </p> :
+                            theatre.data.map(({ movie_name, id: key, backdrop_path, video_path }) => {
+                                return (
+                                    <div
+                                        key={key}
+                                        className="slider__container__card">
+                                        <Trailer_card
+                                            id={key}
+                                            movie_name={movie_name}
+                                            link={video_path}
+                                            play_video={props.play_video}
+                                            image_url={`${props.image_url}${backdrop_path}`}
+                                        />
+                                    </div>
+                                );
+                            })
+                        :
+                        popular.loading == true ? <p> LOADING </p> :
+                            popular.data.map(({ movie_name, id: key, backdrop_path, video_path }) => {
+                                return (
+                                    <div
+                                        key={key}
+                                        className="slider__container__card">
+                                        <Trailer_card
+                                            id={key}
+                                            link={video_path}
+                                            movie_name={movie_name}
+                                            play_video={props.play_video}
+                                            image_url={`${props.image_url}${backdrop_path}`}
+                                        />
+                                    </div>
+                                );
+                            })
                 }
             </Slider>
         </section>
