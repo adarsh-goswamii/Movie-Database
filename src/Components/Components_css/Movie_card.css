@@ -1,0 +1,119 @@
+.movie-card {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie-card__container-shell {
+    width: 14rem;
+    height: 20rem;
+}
+
+.movie-card__container {
+    width: 100%;
+    height: 100%;
+    transition: all 1s ease-in-out;
+    transform-style: preserve-3d;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+}
+
+.movie-card__container__front,
+.movie-card__container__back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    margin: 0;
+}
+
+.movie-card__container__back {
+    padding: 2rem;
+    transform: rotateY(180deg);
+    background-color: rgb(255, 51, 0);
+    color: white;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.movie-card__container__back__heading {
+    font-size: 1rem;
+    text-align: center;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.movie-card__container__back__heading::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--white);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.movie-card__container__back__date,
+.movie-card__container__back__overview {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.movie-card__container__back__overview {
+    height: 50%;
+    overflow-y: scroll;
+}
+
+.movie-card__container-shell:hover .movie-card__container {
+    transform: rotateY(180deg);
+}
+
+.movie-card__container-shell:hover .movie-card__container__front {
+    pointer-events: none;
+}
+
+.movie-card__container-shell:hover .movie-card__container__back__heading::after {
+    opacity: 1;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--linear);
+    border-radius: 10px;
+}
+
+.movie-card__container__back__icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 3;
+    width: 100%;
+}
+
+.movie-card__container__back__icons__fav, 
+.movie-card__container__back__icons__bookmark, 
+.movie-card__container__back__icons__star {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 

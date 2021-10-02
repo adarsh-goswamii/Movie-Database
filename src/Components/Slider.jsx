@@ -7,8 +7,8 @@ import './Components_css/Slider.css';
 const Slider = (props) => {
     let slider_container, btn_prev;
     useEffect(()=> {
-        slider_container= document.querySelector(".slider__container");
-        btn_prev= document.querySelector(".slider__prev");
+        slider_container= document.querySelector(`.slider${props.for}__container`);
+        btn_prev= document.querySelector(`.slider${props.for}__prev`);
     }, [props.children]);
 
     function next() {
@@ -21,8 +21,8 @@ const Slider = (props) => {
         slider_container.style.transform= `translateX(${(parseInt(prev_value)- skip)%mod}px)`;
 
         let translatex= (parseInt(prev_value)- skip)%mod;
-        if(translatex== 0) btn_prev.classList.add("slider__prev--hidden");
-        else btn_prev.classList.remove("slider__prev--hidden");
+        if(translatex== 0) btn_prev.classList.add(`slider${props.for}__prev--hidden`);
+        else btn_prev.classList.remove(`slider${props.for}__prev--hidden`);
     } 
 
     function prev() {
@@ -32,27 +32,27 @@ const Slider = (props) => {
         let mod= slider_container.offsetWidth- skip*2;
         let val= slider_container.style.transform;
         let prev_value= val== ''? 0: val.substring(val.indexOf('(')+1, val.length-3);
-        console.log(prev_value);
+        // console.log(prev_value);
         let final= (parseInt(prev_value)+ skip)%mod;
         slider_container.style.transform= `translateX(${final>0? 0: final}px)`;
 
         let translatex= final;
-        if(translatex== 0) btn_prev.classList.add("slider__prev--hidden");
-        else btn_prev.classList.remove("slider__prev--hidden");
+        if(translatex== 0) btn_prev.classList.add(`slider${props.for}__prev--hidden`);
+        else btn_prev.classList.remove(`slider${props.for}__prev--hidden`);
     }
 
     return (
-        <div className="slider">
+        <div className={`slider${props.for}`}>
             <div 
-                className="slider__prev slider__prev--hidden"
+                className={`slider${props.for}__prev slider${props.for}__prev--hidden`}
                 onClick={prev}>
                 <NavigateBeforeIcon />
             </div>
-            <div className="slider__container">
+            <div className={`slider${props.for}__container`}>
                 {props.children}
             </div>
             <div 
-                className="slider__next"
+                className={`slider${props.for}__next`}
                 onClick={next}>
                 <NavigateNextIcon />
             </div>

@@ -7,7 +7,7 @@ const Trailer_card= (props)=> {
     useEffect(()=> setImg(props.image_url), []);
 
     // Object.keys(props.link.video_path).map((i)=> {
-        console.log("key= ", props.movie_name);
+        // console.log("key= ", props.movie_name);
     // });
 
     return (

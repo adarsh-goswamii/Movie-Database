@@ -47,7 +47,8 @@ const Trailer = (props) => {
                         const temp = {
                             id: movie.id,
                             backdrop_path: movie.backdrop_path,
-                            video_path: video_path
+                            video_path: video_path,
+                            movie_name: movie.title
                         };
 
                         // console.log("temp", temp);
@@ -93,18 +94,18 @@ const Trailer = (props) => {
         "https://c4.wallpaperflare.com/wallpaper/308/457/73/penguins-of-madagascar-funny-movie-wallpaper-preview.jpg";
     poster2 = `url("${poster2}")`;
 
-    console.log(poster);
+    // console.log(poster);
     const someStyle = {
         "--img-url": checked? poster: poster2
     }
 
     function handleState() {
-        console.log("Change State");
+        // console.log("Change State");
         if(checked) setChecked(false);
         else setChecked(true);
     }
 
-    console.log(theatre.data);
+    // console.log(theatre.data);
 
     return (
         <section
@@ -117,7 +118,7 @@ const Trailer = (props) => {
                     className="trailer__toggle"
                     options={["In Threatres", "Trending"]} />
             </div>
-            <Slider >
+            <Slider key="trailer" for="-trailer">
                 {
                     checked == true ?
                         theatre.loading == true ? <p> LOADING </p> :
@@ -125,7 +126,7 @@ const Trailer = (props) => {
                                 return (
                                     <div
                                         key={key}
-                                        className="slider__container__card">
+                                        className="slider-trailer__container__card">
                                         <Trailer_card
                                             id={key}
                                             movie_name={movie_name}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Components_css/Toggle.css';
 
 const Toggle = (props) => {
-    console.log(props.click);
+    // console.log(props.click);
 
     return (
         <div className="toggle">

@@ -6,6 +6,7 @@ import Poster from './Components/Poster';
 import Toggle from './Components/Toggle';
 import Trailer from './Components/Trailer';
 import Slider from './Components/Slider';
+import Movie from './Components/Movie';
 import './index.css';
 
 const API_key = 'd370300724b5dd3d75a44a46e93256c2';
@@ -45,6 +46,9 @@ const Index = () => {
             <div className={playState == 'visible' ? "wrapper--hidden" : "wrapper"}>
                 <Header />
                 <Poster api_key={API_key} image_url={image_url} />
+                <Movie 
+                    api_key={API_key} 
+                    image_url={image_url}/>
                 <Trailer
                     api_key={API_key}
                     play_video={playVideo}
