@@ -7,7 +7,7 @@
 }
 
 .trailer::before {
-    background: url('https://c4.wallpaperflare.com/wallpaper/308/457/73/penguins-of-madagascar-funny-movie-wallpaper-preview.jpg');
+    background: var(--img-url);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -21,7 +21,7 @@
 }
 
 .trailer::after {
-    background: var(--black-film);
+    background: rgba(0, 0, 0, 0.4);
     z-index: -2;
     content: '';
     position: absolute;

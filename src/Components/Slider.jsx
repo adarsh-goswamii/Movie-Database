@@ -9,7 +9,7 @@ const Slider = (props) => {
     useEffect(()=> {
         slider_container= document.querySelector(".slider__container");
         btn_prev= document.querySelector(".slider__prev");
-    }, []);
+    }, [props.children]);
 
     function next() {
         if(slider_container== null || slider_container== undefined) return;

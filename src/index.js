@@ -14,7 +14,7 @@ const Index = () => {
     const [playState, setPlayState] = useState("");
     const [url, setUrl] = useState("");
     function playVideo(link, state) {
-        link = "https://www.youtube.com/embed/jK2VROKKTSQ";
+        link = `https://www.youtube.com/embed/${link}`;
         setUrl(link);
         setPlayState(state);
     }
@@ -35,7 +35,10 @@ const Index = () => {
             <div className={playState== 'visible'? "wrapper--hidden": "wrapper"}>
                 <Header />
                 <Poster api_key={API_key} image_url={image_url} />
-                <Trailer play_video={playVideo} />
+                <Trailer 
+                    api_key={API_key} 
+                    play_video={playVideo}
+                    image_url={image_url} />
                 <Footer />
             </div>
         </>
