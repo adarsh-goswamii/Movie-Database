@@ -5,7 +5,7 @@ const MenuItem= (props)=> {
     const[state, setState]= useState("");
     function toggleActive(event) {
         event.target.classList.toggle("menuitem__submenu--active");
-        if(state== "") setState("menuitem__submenu--active");
+        if(state=== "") setState("menuitem__submenu--active");
         else setState("");
     }
 

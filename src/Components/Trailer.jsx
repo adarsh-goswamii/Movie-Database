@@ -7,7 +7,7 @@ import './Components_css/Trailer.css';
 const Trailer = (props) => {
     let i = 0;
     let temp_popular = {};
-    const [checked, setChecked] = useState(true);
+    const [checked, setChecked] = useState(false);
     const [theatre, setTheatre] = useState({ loading: true, data: [] });
     const [popular, setPopular] = useState({ loading: true, data: [] });
 
@@ -72,7 +72,7 @@ const Trailer = (props) => {
             .then(({ results }) => {
                 for (let data of results) {
                     // console.log(data);
-                    if (data.site == 'YouTube' && data.type == 'Trailer') {
+                    if (data.site === 'YouTube' && data.type === 'Trailer') {
                         // console.log("value returned");
                         return data.key;
                     }
@@ -82,7 +82,6 @@ const Trailer = (props) => {
         return response;
     };
 
-    // ============================================================================================================
 
     let poster = theatre.data.length > 0 ?
         `${props.image_url}${theatre.data[0].backdrop_path}` :
@@ -100,12 +99,10 @@ const Trailer = (props) => {
     }
 
     function handleState() {
-        // console.log("Change State");
+        console.log("Change State trailer");
         if(checked) setChecked(false);
         else setChecked(true);
     }
-
-    // console.log(theatre.data);
 
     return (
         <section
@@ -114,14 +111,15 @@ const Trailer = (props) => {
             <div className="trailer__head">
                 <h3 className="trailer__heading">Latest Trailers</h3>
                 <Toggle
+                    id="trailer"
                     click={handleState}
                     className="trailer__toggle"
                     options={["In Threatres", "Trending"]} />
             </div>
             <Slider key="trailer" for="-trailer">
                 {
-                    checked == true ?
-                        theatre.loading == true ? <p> LOADING </p> :
+                    checked === true ?
+                        theatre.loading === true ? <p> LOADING </p> :
                             theatre.data.map(({ movie_name, id: key, backdrop_path, video_path }) => {
                                 return (
                                     <div
@@ -138,12 +136,12 @@ const Trailer = (props) => {
                                 );
                             })
                         :
-                        popular.loading == true ? <p> LOADING </p> :
+                        popular.loading === true ? <p> LOADING </p> :
                             popular.data.map(({ movie_name, id: key, backdrop_path, video_path }) => {
                                 return (
                                     <div
                                         key={key}
-                                        className="slider__container__card">
+                                        className="slider-trailer__container__card">
                                         <Trailer_card
                                             id={key}
                                             link={video_path}

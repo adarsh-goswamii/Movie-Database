@@ -95,7 +95,7 @@ img {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: var(--linear);
+    background: #F17300;
     border-radius: 10px;
 }
 

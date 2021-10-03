@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Poster from './Components/Poster';
-import Toggle from './Components/Toggle';
 import Trailer from './Components/Trailer';
-import Slider from './Components/Slider';
 import Movie from './Components/Movie';
 import './index.css';
 
