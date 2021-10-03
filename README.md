@@ -3,9 +3,9 @@
 ###### Deployed (link): https://615a252cd7d3a88072dba841--confident-lumiere-1adac6.netlify.app/
 
 ###### ABOUT THE PROJECT: 
-######                    1. Designed and developed a movie database website using the TMDB API (https://developers.themoviedb.org/3).
+######                    1. Designed and developed a movie database website using the TMDB API (https://developers.themoviedb.org/3) so the data is dynamic and for almost everything site does'nt uses static data.
 ######                    2. Uses React concepts like hook mainly {useState, useEffect}, conditional rendering, lifting state up, dynamic child components and many more.
-######                    3. Uses Javascript concepts like closure, asynchronous javascript concepts promise chaining, async, await and other concepts.
+######                    3. Uses Javascript concepts like closure, destructuring, asynchronous javascript concepts promise chaining, async, await and other concepts.
 ######                    4. For styling it uses BEM methodology to avoid spilling of css to other components making every class unique but in some places you might see CSS module technique too. _For practice and learning purpose tried not to use any libraries for slider or other components._
 ######                    5. Currently working on it so it has unfinished components and bugs too, hopefully it will be completed very soon.
 
