@@ -2,7 +2,8 @@
 ###### UI Design (Figma link): https://www.figma.com/file/YahyZqk1w5GaZeS8IgEm8n/Untitled?node-id=0%3A1
 ###### Deployed (link): https://615a252cd7d3a88072dba841--confident-lumiere-1adac6.netlify.app/
 
-###### ABOUT THE PROJECT: 1. Designed and developed a movie database website using the TMDB API (https://developers.themoviedb.org/3).
+###### ABOUT THE PROJECT: 
+######                    1. Designed and developed a movie database website using the TMDB API (https://developers.themoviedb.org/3).
 ######                    2. Uses React concepts like hook mainly {useState, useEffect}, conditional rendering, lifting state up, dynamic child components and many more.
 ######                    3. Uses Javascript concepts like closure, asynchronous javascript concepts promise chaining, async, await and other concepts.
 ######                    4. For styling it uses BEM methodology to avoid spilling of css to other components making every class unique but in some places you might see CSS module technique too. _For practice and learning purpose tried not to use any libraries for slider or other components._
