@@ -124,7 +124,7 @@ const Trailer = (props) => {
                                 return (
                                     <div
                                         key={key}
-                                        className="slider-trailer__container__card">
+                                        className="slider__container__card">
                                         <Trailer_card
                                             id={key}
                                             movie_name={movie_name}
@@ -141,7 +141,7 @@ const Trailer = (props) => {
                                 return (
                                     <div
                                         key={key}
-                                        className="slider-trailer__container__card">
+                                        className="slider__container__card">
                                         <Trailer_card
                                             id={key}
                                             link={video_path}

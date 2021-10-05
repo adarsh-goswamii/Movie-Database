@@ -1,0 +1,35 @@
+.play-video--active {
+    pointer-events: all;
+    visibility: visible;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 4;
+    background-color: var(--black-film);
+}
+
+.play-video {
+    pointer-events: none;
+    visibility: hidden;
+    position: absolute;
+}
+
+.play-video__player {
+    width: 80%;
+    height: 80%;
+    position: fixed;
+}
+
+.wrapper {
+    pointer-events: all;
+    visibility: visible;
+    position: relative;
+}
+
+
+.wrapper--hidden {
+    pointer-events: none;
+}

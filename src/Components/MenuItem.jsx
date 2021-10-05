@@ -9,17 +9,25 @@ const MenuItem= (props)=> {
         else setState("");
     }
 
+    function trigger(e) {
+        e.target.classList.remove("menuitem__submenu--active");
+    }
+
     return (
-        <div className="menuitem" onClick={toggleActive}>
-            <div className="menuitem__title">
+        <div className="menuitem" >
+            <div onClick={toggleActive} className="menuitem__title">
             {props.title}
             </div>
-            <div className={`menuitem__submenu ${state}`}>
+            <div 
+                onMouseLeave={trigger}
+                className={`menuitem__submenu ${state}`}>
             {
                 props.submenu.map((i)=> {
                     return (
                         // TODO: Add link tags according to the provided item.
-                        <p className="menuitem__submenu__item" key={i}>
+                        <p 
+                            className="menuitem__submenu__item"
+                            key={i}>
                         {i}
                         </p>
                     );

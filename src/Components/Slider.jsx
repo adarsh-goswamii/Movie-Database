@@ -7,8 +7,8 @@ import './Components_css/Slider.css';
 const Slider = (props) => {
     let slider_container, btn_prev;
     useEffect(()=> {
-        slider_container= document.querySelector(`.slider${props.for}__container`);
-        btn_prev= document.querySelector(`.slider${props.for}__prev`);
+        slider_container= document.querySelector(`#slider${props.for}__container`);
+        btn_prev= document.querySelector(`#slider${props.for}__prev`);
     }, [props.children]);
 
     function next() {
@@ -21,8 +21,8 @@ const Slider = (props) => {
         slider_container.style.transform= `translateX(${(parseInt(prev_value)- skip)%mod}px)`;
 
         let translatex= (parseInt(prev_value)- skip)%mod;
-        if(translatex=== 0) btn_prev.classList.add(`slider${props.for}__prev--hidden`);
-        else btn_prev.classList.remove(`slider${props.for}__prev--hidden`);
+        if(translatex=== 0) btn_prev.classList.add(`slider__prev--hidden`);
+        else btn_prev.classList.remove(`slider__prev--hidden`);
     } 
 
     function prev() {
@@ -37,22 +37,25 @@ const Slider = (props) => {
         slider_container.style.transform= `translateX(${final>0? 0: final}px)`;
 
         let translatex= final;
-        if(translatex=== 0) btn_prev.classList.add(`slider${props.for}__prev--hidden`);
-        else btn_prev.classList.remove(`slider${props.for}__prev--hidden`);
+        if(translatex=== 0) btn_prev.classList.add(`slider__prev--hidden`);
+        else btn_prev.classList.remove(`slider__prev--hidden`);
     }
 
     return (
-        <div className={`slider${props.for}`}>
+        <div className={`slider`}>
             <div 
-                className={`slider${props.for}__prev slider${props.for}__prev--hidden`}
+                className={`slider__prev slider__prev--hidden`}
+                id={`slider${props.for}__prev`}
                 onClick={prev}>
                 <NavigateBeforeIcon />
             </div>
-            <div className={`slider${props.for}__container`}>
+            <div 
+                className={`slider__container`} 
+                id={`slider${props.for}__container`}>
                 {props.children}
             </div>
             <div 
-                className={`slider${props.for}__next`}
+                className={`slider__next`}
                 onClick={next}>
                 <NavigateNextIcon />
             </div>

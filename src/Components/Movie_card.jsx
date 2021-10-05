@@ -8,7 +8,6 @@ const Movie_card = ({image_url, overview, id, movie_name, release_date}) => {
 
     let month= ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let year= release_date.substring(0, 4), mon= release_date.substring(5, 7), date= release_date.substring(8, 10);
-    
     release_date= `${date} ${month[parseInt(mon)]}, ${year}`;
 
     return (
@@ -17,6 +16,7 @@ const Movie_card = ({image_url, overview, id, movie_name, release_date}) => {
                 <div className="movie-card__container">
                     <div className="movie-card__container__front">
                         <img
+                            className="movie-card__container__front__img"
                             src={image_url}
                             alt="Movie picture" />
                     </div>

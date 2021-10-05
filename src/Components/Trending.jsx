@@ -4,33 +4,32 @@ import Toggle from "./Toggle";
 import Slider from './Slider';
 import './Components_css/Movie.css';
 
-const Movie = (props) => {
+const Trending = (props) => {
     const [checked, setChecked]= useState(true);
-    const [movie, setMovie]= useState({loading: true, data:[]});
-    const [television, setTelevision]= useState({loading: true, data:[]});
+    const [today, setToday]= useState({loading: true, data:[]});
+    const [week, setWeek]= useState({loading: true, data:[]});
     
     useEffect(()=> {
-        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${props.api_key}&page=1`)
+        fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${props.api_key}&page=1`)
         .then(data=> data.json())
         .then(({results})=> {
             results.map(({id, poster_path, title, release_date, overview})=> {
                 let temp= { id, poster_path, title, release_date, overview };
-                setMovie(({data})=> ({loading: false, data: [...data, temp]}));
+                setToday(({data})=> ({loading: false, data: [...data, temp]}));
             });
         });
 
-        fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${props.api_key}&page=1`)
+        fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${props.api_key}&page=1`)
         .then(data=> data.json())
         .then(({results})=> {
-            results.map(({id, poster_path, name, first_air_date, overview})=> {
-                let temp= { id, poster_path, name, first_air_date, overview };
-                setTelevision(({data})=> ({loading: false, data: [...data, temp]}));
+            results.map(({id, poster_path, title, release_date, overview})=> {
+                let temp= { id, poster_path, title, release_date, overview };
+                setWeek(({data})=> ({loading: false, data: [...data, temp]}));
             });
         });
     }, []);
 
-    function handleState2() {
-        console.log("Change State Movie");
+    function handleState() {
         if(checked) setChecked(false);
         else setChecked(true);
     }
@@ -39,18 +38,18 @@ const Movie = (props) => {
         <section
             className="movie">
             <div className="movie__head">
-                <h3 className="movie__heading">What's Popular</h3>
+                <h3 className="movie__heading">Trending</h3>
                 <Toggle
-                    id="movie"
-                    click={handleState2}
-                    className="movie__toggle"
-                    options={["In Theatres", "On TV"]} />
+                    id="trending"
+                    click={handleState}
+                    className="trending__toggle"
+                    options={["Today", "This Week"]} />
             </div>
-            <Slider key="movie" for="-movie">
+            <Slider key="trending" for="-trending">
                 {
                     checked?
-                    movie.loading === true ? <p> LOADING </p> :
-                        movie.data.map(({ title, id: key, poster_path: backdrop_path, overview, release_date }) => {
+                    today.loading === true ? <p> LOADING </p> :
+                        today.data.map(({ title, id: key, poster_path: backdrop_path, overview, release_date }) => {
                             return (
                                 <div
                                     key={key}
@@ -66,17 +65,17 @@ const Movie = (props) => {
                             );
                         })
                     :
-                    television.loading === true ? <p> LOADING </p> :
-                        television.data.map(({ name, id: key, poster_path: backdrop_path, overview, first_air_date }) => {
+                    week.loading === true ? <p> LOADING </p> :
+                        week.data.map(({ title, id: key, poster_path: backdrop_path, overview, release_date }) => {
                             return (
                                 <div
                                     key={key}
                                     className="slider__container__card">
                                     <Movie_card
                                         id={key}
-                                        movie_name={name}
+                                        movie_name={title}
                                         overview={overview}
-                                        release_date={first_air_date}
+                                        release_date={release_date}
                                         image_url={`${props.image_url}${backdrop_path}`}
                                     />
                                 </div>
@@ -88,4 +87,4 @@ const Movie = (props) => {
     );
 }
 
-export default Movie;
+export default Trending;

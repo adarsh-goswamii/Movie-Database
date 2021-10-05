@@ -20,7 +20,7 @@
     border-radius: 0.5rem;
 }
 
-img {
+.movie-card__container__front__img {
     width: 100%;
     height: 100%;
     border-radius: 0.5rem;
@@ -89,12 +89,12 @@ img {
     opacity: 1;
 }
 
-::-webkit-scrollbar {
+.movie-card__container__back ::-webkit-scrollbar {
     width: 5px;
 }
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+.movie-card__container__back ::-webkit-scrollbar-thumb {
     background: #F17300;
     border-radius: 10px;
 }
