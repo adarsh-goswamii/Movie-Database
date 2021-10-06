@@ -1,6 +1,6 @@
 
 ###### UI Design (Figma link): https://www.figma.com/file/YahyZqk1w5GaZeS8IgEm8n/Untitled?node-id=0%3A1
-###### Deployed (link): https://615a252cd7d3a88072dba841--confident-lumiere-1adac6.netlify.app/
+###### Deployed (link): https://615d1db3e62510000791477d--confident-lumiere-1adac6.netlify.app/
 
 ###### ABOUT THE PROJECT: 
 ######                    1. Designed and developed a movie database website using the TMDB API (https://developers.themoviedb.org/3) so the data is dynamic and for almost everything site does'nt uses static data.
