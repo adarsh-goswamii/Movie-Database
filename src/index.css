@@ -9,6 +9,11 @@
 }
 
 @font-face {
+    font-family: SegoeItalic;
+    src: url(../src/fonts/Segoe\ UI\ Italic.ttf);
+}
+
+@font-face {
     font-family: SegoeBold;
     src: url(../src/fonts/Segoe\ UI\ Bold.ttf);
 }

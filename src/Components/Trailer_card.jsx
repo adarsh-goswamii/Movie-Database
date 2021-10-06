@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import './Components_css/Trailer_card.css';
+import '../CSS/Trailer_card.css';
 
 const Trailer_card= (props)=> {
     const [img, setImg]= useState('');
@@ -18,7 +18,7 @@ const Trailer_card= (props)=> {
         onClick={()=> props.play_video(props.link, "visible")}
         style={{backgroundImage: `url(${img})`}}>
             <h3 className="trailer-card__movie-name">{props.movie_name}</h3>
-            <PlayArrowIcon className="trailer-card__play"/>
+            <div className="trailer-card__play"><PlayArrowIcon/></div>
         </div>
     );
 };

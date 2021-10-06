@@ -1,6 +1,6 @@
 import React from 'react';
 import MovieIcon from '@mui/icons-material/Movie';
-import './Components_css/Logo.css';
+import '../CSS/Logo.css';
 
 const Logo= ()=> {
     return (

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './Components_css/Player.css';
+import '../CSS/Player.css';
 
 const Player = (props) => {
     function handleClick(e) {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Movie_card from "./Movie_card";
 import Toggle from "./Toggle";
 import Slider from './Slider';
-import './Components_css/Movie.css';
+import '../CSS/Movie.css';
 
 const Movie = (props) => {
     const [checked, setChecked]= useState(true);

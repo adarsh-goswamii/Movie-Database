@@ -11,10 +11,11 @@
     padding: 1rem 1rem 3rem;
     position: relative;
     flex-direction: column;
+    overflow: hidden;
 }
 
 
-.trailer-card:hover::before {
+.trailer-card::before {
     content: '';
     position: absolute;
     top: 0;
@@ -26,26 +27,24 @@
     background-color: rgba(0, 0, 0, .7);
 }
 
-.trailer-card:hover .trailer-card__play {
-    opacity: 1;
-}
-
-.trailer-card:hover .trailer-card__movie-name {
-    visibility: visible;
-    pointer-events: all;
-}
-
 .trailer-card__play {
-    transform: scale(3);
+    transform: scale(2);
     color: var(--white);
-    opacity: .6;
+    opacity: 1;
     z-index: 2;
+    transition: all .5s ease;
 }
 
 .trailer-card__movie-name {
+    transition: .5s ease;
     color: var(--white);
-    visibility: hidden;
-    pointer-events: none;
     z-index: 2;
 }
 
+.trailer-card:hover .trailer-card__movie-name {
+    transform: translateY(-300%);
+}
+
+.trailer-card:hover .trailer-card__play {
+    transform: scale(3) translateY(-10%);
+}

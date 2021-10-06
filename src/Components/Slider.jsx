@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import Trailer_card from './Trailer_card';
-import './Components_css/Slider.css';
+import '../CSS/Slider.css';
 
 const Slider = (props) => {
     let slider_container, btn_prev;

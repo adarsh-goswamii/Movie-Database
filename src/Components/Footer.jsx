@@ -4,7 +4,7 @@ import CopyrightIcon from '@mui/icons-material/Copyright';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import './Components_css/Footer.css';
+import '../CSS/Footer.css';
 
 const Footer = () => {
     return (

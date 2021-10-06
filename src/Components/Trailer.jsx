@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Trailer_card from './Trailer_card';
 import Toggle from './Toggle';
 import Slider from './Slider';
-import './Components_css/Trailer.css';
+import '../CSS/Trailer.css';
 
 const Trailer = (props) => {
     let i = 0;

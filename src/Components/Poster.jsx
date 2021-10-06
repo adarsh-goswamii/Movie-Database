@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Components_css/Poster.css';
+import '../CSS/Poster.css';
 
 const Poster = (props) => {
     const [image, setImage] = useState('');

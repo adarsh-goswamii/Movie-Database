@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './Components_css/Toggle.module.css';
+import styles from '../CSS/Toggle.module.css';
 
 const Toggle = (props) => {
     // console.log(props.click);
