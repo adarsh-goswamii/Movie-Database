@@ -24,7 +24,7 @@ const Index = () => {
                     />
                 </Route>
                 <Route path='/'>
-                    <Redirect to='/movie/580489'/>
+                    <Redirect to='/homepage'/>
                 </Route>
             </Switch>
         </BrowserRouter>
