@@ -95,7 +95,7 @@
 
 /* Handle */
 .movie-card__container__back ::-webkit-scrollbar-thumb {
-    background: #F17300;
+    background: var(--grey-dark);
     border-radius: 10px;
 }
 
