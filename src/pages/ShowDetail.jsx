@@ -15,7 +15,7 @@ import MovieCard from '../Components/Movie_card';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-const MovieDetails = (props) => {
+const ShowDetail = (props) => {
     let [reload, setReload] = useState(true);
     const params = useParams();
     let history = useHistory();
@@ -36,10 +36,10 @@ const MovieDetails = (props) => {
         setVideos([]);
         setSimilarMovies([]);
         setBackdrop([]);
-        let id = params.movieId;
+        let id = params.showId;
 
         // ! POSTERS
-        fetch(`https://api.themoviedb.org/3/movie/${id}/images?api_key=${props.api_key}`)
+        fetch(`https://api.themoviedb.org/3/tv/${id}/images?api_key=${props.api_key}`)
             .then(data => data.json())
             .then(({ backdrops }) => {
                 backdrops.map(i => {
@@ -49,23 +49,24 @@ const MovieDetails = (props) => {
             });
 
         // ! INFORMATION
-        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${props.api_key}&language=en-US`)
+        fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=${props.api_key}&language=en-US`)
             .then(data => data.json())
             .then(data => {
                 let { backdrop_path,
                     poster_path,
-                    title,
+                    name: title,
                     tagline,
                     overview,
-                    release_date,
-                    runtime,
+                    first_air_date: release_date,
+                    episode_run_time: runtime,
                     vote_average,
                     genres } = data;
+                release_date = release_date.length == 0 ? 60 : release_date[0];
                 setMovie({ vote_average, backdrop_path, poster_path, title, tagline, overview, release_date, runtime, genres });
             });
 
         // ! CAST. 
-        fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${props.api_key}`)
+        fetch(`https://api.themoviedb.org/3/tv/${id}/credits?api_key=${props.api_key}`)
             .then(data => data.json())
             .then(({ cast: _cast }) => {
                 _cast.forEach(i => {
@@ -76,7 +77,7 @@ const MovieDetails = (props) => {
             });
 
         // ! YOUTUBE VIDEOS
-        fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${props.api_key}&language=en-US`)
+        fetch(`https://api.themoviedb.org/3/tv/${id}/videos?api_key=${props.api_key}&language=en-US`)
             .then(data => data.json())
             .then(({ results }) => {
                 results.forEach(i => {
@@ -87,17 +88,17 @@ const MovieDetails = (props) => {
             });
 
         // ! SIMILAR MOVIES
-        fetch(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${props.api_key}&language=en-US&page=1`)
+        fetch(`https://api.themoviedb.org/3/tv/${id}/similar?api_key=${props.api_key}&language=en-US&page=1`)
             .then(data => data.json())
             .then(({ results }) => {
                 results.forEach(i => {
-                    let { title, poster_path, overview, release_date, id } = i;
+                    let { name: title, poster_path, overview, first_air_date: release_date, id } = i;
                     setSimilarMovies(prev => [...prev, { title, poster_path, overview, release_date, id }]);
                     setLoading(false);
                 });
             });
 
-    }, [params.movieId]);
+    }, [params.showId]);
 
     function formatDate(release_date) {
         if (release_date == undefined || release_date == null) return "";
@@ -215,11 +216,10 @@ const MovieDetails = (props) => {
                                 similar_movies.map(({ title, poster_path, overview, release_date, id }) => {
                                     return (
                                         <div className="slider__container__card" key={id}>
-                                            <Link to={`/movie/${id}`}>
+                                            <Link to={`/show/${id}`}>
                                                 <MovieCard
                                                     onClick={() => {
-                                                        history.replace(`/movie/${id}`);
-                                                        setReload(prev => !prev);
+                                                        history.replace(`/show/${id}`);
                                                     }}
                                                     id={id}
                                                     movie_name={title}
@@ -240,4 +240,4 @@ const MovieDetails = (props) => {
     );
 }
 
-export default MovieDetails;
+export default ShowDetail;

@@ -12,7 +12,6 @@ const Movie_card = ({ image_url, overview, id, movie_name, release_date }) => {
     release_date = `${date} ${month[parseInt(mon)]}, ${year}`;
 
     return (
-        <Link to={`/movie/${id}`}>
             <div className="movie-card" key={id}>
                 <div className="movie-card__container-shell">
                     <div className="movie-card__container">
@@ -35,7 +34,6 @@ const Movie_card = ({ image_url, overview, id, movie_name, release_date }) => {
                     </div>
                 </div>
             </div>
-        </Link>
     );
 }
 

@@ -33,7 +33,6 @@ const Homepage= (props)=> {
                     api_key={props.api_key}
                     play_video={playVideo}
                     image_url={props.image_url} />
-
                 <Trending 
                     api_key={props.api_key}
                     image_url={props.image_url}/>
