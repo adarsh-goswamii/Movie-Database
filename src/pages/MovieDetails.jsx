@@ -16,6 +16,7 @@ import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 const MovieDetails = (props) => {
+    let counter= 1;
     let [reload, setReload] = useState(true);
     const params = useParams();
     let history = useHistory();
@@ -29,6 +30,7 @@ const MovieDetails = (props) => {
     const [playState, setPlayState] = useState("not visible");
 
     useEffect(() => {
+        counter= 0;
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
         setLoading(true);
         setMovie([]);
@@ -100,10 +102,12 @@ const MovieDetails = (props) => {
     }, [params.movieId]);
 
     function formatDate(release_date) {
+        // console.log(release_date);
         if (release_date == undefined || release_date == null) return "";
         let month = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         let year = release_date.substring(0, 4), mon = release_date.substring(5, 7), date = release_date.substring(8, 10);
         release_date = `${date} ${month[parseInt(mon)]}, ${year}`;
+        // console.log(release_date);
         return release_date;
     }
 
@@ -119,13 +123,14 @@ const MovieDetails = (props) => {
         setPlayState(state);
     }
 
-    function backdropReturn(counter) {
+    function backdropReturn() {
+        // console.log("backdrop", counter);
         let ret = props.image_url + backdrop[(counter) % backdrop.length];
         counter += 1;
+        // console.log("ret", counter);
         return ret;
     }
 
-    let counter = 0;
     return (
         <>
             <Player

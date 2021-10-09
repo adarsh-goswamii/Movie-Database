@@ -16,6 +16,7 @@ import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 const ShowDetail = (props) => {
+    let counter= 1;
     let [reload, setReload] = useState(true);
     const params = useParams();
     let history = useHistory();
@@ -29,6 +30,7 @@ const ShowDetail = (props) => {
     const [playState, setPlayState] = useState("not visible");
 
     useEffect(() => {
+        counter= 1;
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
         setLoading(true);
         setMovie([]);
@@ -120,13 +122,12 @@ const ShowDetail = (props) => {
         setPlayState(state);
     }
 
-    function backdropReturn(counter) {
+    function backdropReturn() {
         let ret = props.image_url + backdrop[(counter) % backdrop.length];
         counter += 1;
         return ret;
     }
 
-    let counter = 0;
     return (
         <>
             <Player

@@ -1,0 +1,37 @@
+.explore {
+    padding: 2rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 3.5fr;
+    grid-gap: 2rem;
+}
+
+.explore__criteria {
+    background-color: aqua;
+}
+
+.explore__data {
+    /* background-color: rgb(182, 55, 55); */
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;   
+}
+
+.search__container__card {
+    padding: 1rem;
+}
+
+.explore__search-btn {
+    visibility: hidden;
+    pointer-events: none;
+    color: var(--white);
+    font-size: 1.2rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    background: var(--orange);
+    z-index: 10;
+}

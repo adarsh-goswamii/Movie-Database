@@ -21,3 +21,6 @@
     color: var(--white);
 }
 
+#logo {
+    text-decoration: none;
+}
