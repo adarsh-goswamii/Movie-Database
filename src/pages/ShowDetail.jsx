@@ -63,7 +63,7 @@ const ShowDetail = (props) => {
                     episode_run_time: runtime,
                     vote_average,
                     genres } = data;
-                release_date = release_date.length == 0 ? 60 : release_date[0];
+                runtime = runtime.length == 0 ? 60 : runtime[0];
                 setMovie({ vote_average, backdrop_path, poster_path, title, tagline, overview, release_date, runtime, genres });
             });
 
