@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import '../CSS/MenuItem.css';
+import { Link } from 'react-router-dom';
 
-const MenuItem= (props)=> {
-    const[state, setState]= useState("");
+const MenuItem = (props) => {
+    const [state, setState] = useState("");
     function toggleActive(event) {
         event.target.classList.toggle("menuitem__submenu--active");
-        if(state=== "") setState("menuitem__submenu--active");
+        if (state === "") setState("menuitem__submenu--active");
         else setState("");
     }
 
@@ -16,25 +17,26 @@ const MenuItem= (props)=> {
     return (
         <div className="menuitem" >
             <div onClick={toggleActive} className="menuitem__title">
-            {props.title}
+                {props.title}
             </div>
-            <div 
+            <div
                 onMouseLeave={trigger}
                 className={`menuitem__submenu ${state}`}>
-            {
-                props.submenu.map((i)=> {
-                    return (
-                        // TODO: Add link tags according to the provided item.
-                        <p 
-                            className="menuitem__submenu__item"
-                            key={i}>
-                        {i}
-                        </p>
-                    );
-                })
-            }
+                {
+                    props.submenu.map(({ name, link }) => {
+                        return (
+                            <Link to={`${link}`}>
+                                <p
+                                    className="menuitem__submenu__item"
+                                    key={name}>
+                                    {name}
+                                </p>
+                            </Link>
+                        );
+                    })
+                }
             </div>
-        </div>
+        </div >
     );
 }
 

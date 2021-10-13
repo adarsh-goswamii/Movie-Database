@@ -38,4 +38,5 @@
     transform: scale(1.2);
     color: var(--white);
     margin-right: 2rem;
+    cursor: pointer;
 }

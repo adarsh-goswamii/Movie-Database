@@ -37,3 +37,8 @@ body {
     box-sizing: border-box;
     font-family: Segoe;
 }
+
+a {
+    text-decoration: none;
+    color: black;
+}

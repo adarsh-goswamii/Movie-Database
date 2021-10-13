@@ -38,7 +38,7 @@ const Index = () => {
                         />
                 </Route>
                 <Route path='/'>
-                    <Redirect to='/Search'/>
+                    <Redirect to='/homepage'/>
                 </Route>
             </Switch>
         </BrowserRouter>
