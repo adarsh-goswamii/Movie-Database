@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import Movie_card from '../Components/Movie_card';
@@ -9,15 +9,17 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import SearchIcon from '@mui/icons-material/Search';
 
 const Search = (props) => {
-    const [btnstate, setBtnState]= useState(false); 
+    const [btnstate, setBtnState] = useState(false);
     const [render, setRender] = useState(false);
     const [genres, setGenres] = useState([]);
     const [explore, setExplore] = useState({
         keyword: null,
         sort: 'popularity.desc',
-        genre: []
+        genre: new Set()
     });
     const [data, setData] = useState([]);
+    const location = useLocation();
+    const history = useHistory();
 
     useEffect(() => {
         setBtnState(false);
@@ -29,6 +31,18 @@ const Search = (props) => {
         });
         setData([]);
 
+        const query_params = new URLSearchParams(location.search);
+        let tsort = query_params.get('sort');
+        let tgenre = query_params.get('genre');
+        let tkeyword = query_params.get('keyword');
+        // console.log('tgenre', tgenre.split(','));
+
+        if (tsort != null && tsort != undefined) setExplore(prev => ({ ...prev, sort: tsort }));
+        if (tgenre != null && tgenre != undefined && tgenre.length != 0) {
+            setExplore(prev => ({ ...prev, genre: new Set(tgenre.split(',')) }));
+        }
+        if (tkeyword != null && tkeyword != undefined) setExplore(prev => ({ ...prev, keyword: tkeyword }));
+
         // ! GENRES
         fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${props.api_key}&language=en-US`)
             .then(data => data.json())
@@ -37,7 +51,36 @@ const Search = (props) => {
                     setGenres(prev => [...prev, i]);
                 });
             });
-    }, [render]);
+
+        let arr = Array.from(explore.genre);
+        let var_genre = "";
+        for (let key of arr) var_genre = var_genre + key + ",";
+        var_genre = var_genre.substring(0, var_genre.length - 1);
+
+
+        if (explore.keyword == null || explore.keyword == undefined) {
+            fetch(`https://api.themoviedb.org/3/discover/movie?api_key=d370300724b5dd3d75a44a46e93256c2&language=en-US&sort_by=${explore.sort}&include_adult=false&include_video=false&page=1&with_genres=${var_genre}&with_watch_monetization_types=flatrate`)
+                .then(data => data.json())
+                .then(({ results }) => {
+                    results.map(({ poster_path, id, title, overview, release_date }) => {
+                        setData(prev => [...prev, { poster_path, id, title, overview, release_date }]);
+                    });
+                });
+        } else {
+            fetch(`https://api.themoviedb.org/3/search/movie?api_key=d370300724b5dd3d75a44a46e93256c2&language=en-US&query=${explore.keyword}&page=1&include_adult=false`)
+                .then(data => data.json())
+                .then(({ results }) => {
+                    results.map(({ poster_path, id, title, overview, release_date }) => {
+                        setData(prev => [...prev, { poster_path, id, title, overview, release_date }]);
+                    });
+                });
+        }
+
+
+        setExplore(prev => ({ ...prev, genre: new Set(), keyword: null }));
+        console.log(genres);
+
+    }, [location.search]);
 
     function activeGenre(e) {
         setBtnState(true);
@@ -47,9 +90,9 @@ const Search = (props) => {
             e.target.classList.add("explore__criteria__filter__genres__options--active");
         } else {
             setExplore(prev => {
-                let data= prev.genre;
+                let data = prev.genre;
                 data.delete(e.target.id);
-                return {...prev, genre: data};
+                return { ...prev, genre: data };
             });
             e.target.classList.remove("explore__criteria__filter__genres__options--active");
         }
@@ -61,17 +104,21 @@ const Search = (props) => {
             console.log(e.target.value);
             explore.keyword = e.target.value;
             e.target.value = "";
-            setRender(prev => !prev);
+            handleSearch();
         }
     }
 
     function handleSort(e) {
         setBtnState(true);
-        setExplore(prev=> ({...prev, sort: `${e.target.value}`}));
+        setExplore(prev => ({ ...prev, sort: `${e.target.value}` }));
     }
 
     function handleSearch() {
-        
+        let arr = Array.from(explore.genre);
+        let var_genre = "";
+        for (let key of arr) var_genre = var_genre + key + ",";
+        var_genre = var_genre.substring(0, var_genre.length - 1);
+        history.push(`/Search?sort=${explore.sort}&genre=${var_genre}&keyword=${explore.keyword}`);
     }
 
     return (
@@ -139,14 +186,6 @@ const Search = (props) => {
                     </div>
                 </div>
                 <div className="explore__data">
-                    <h1>{explore.sort}</h1>
-                    <div>{
-                        [...explore.genre].map(name => {
-                            return <p>{name}</p>;
-                        })
-                    }
-                    </div>
-                    <h2>hiiii</h2>
                     {
                         data.map(({ title, id: key, poster_path: backdrop_path, overview, release_date }) => {
                             return (
@@ -168,8 +207,8 @@ const Search = (props) => {
                     }
                 </div>
                 <div
-                    onClick={handleSearch} 
-                    className={`explore__search-btn ${btnstate? "explore__search-btn--active": ""}`}>
+                    onClick={handleSearch}
+                    className={`explore__search-btn ${btnstate ? "explore__search-btn--active" : ""}`}>
                     Search
                 </div>
             </div>
