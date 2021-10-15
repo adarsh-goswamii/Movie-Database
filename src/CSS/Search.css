@@ -4,20 +4,71 @@
     display: flex;
 }
 
-/* .explore__criteria {
-    background-color: aqua;
-} */
-
 .explore__data {
     transform: translateY(-1rem);
     float: right;
     width: 75%;
-    /* background-color: rgb(182, 55, 55); */
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     flex-wrap: wrap;
-    grid-column: 2/3;
     color: black;
+}
+
+.explore__not-found {
+    float: right;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    grid-template-columns: 2/3;
+    padding: 4rem 0rem;
+    position: relative;
+}
+
+.explore__not-found__data {
+    width: 60%;
+}
+
+.not-found__heading {
+    color: var(--grey-light);
+    font-size: 2.5rem;
+}
+
+.not-found__heading:: {
+    color: aqua;
+}
+
+.not-found__sub-heading {
+    color: var(--black);
+    font-size: 1.2rem;
+    margin: 2rem 0rem;
+}
+
+.not-found__explore {
+    border: none;
+    padding: .6rem 6rem;
+    font-size: 1.2rem;
+    background: var(--linear);
+    color: var(--white);
+    border-radius: .5rem;
+}
+
+.explore__not-found__image {
+    position: absolute;
+    width: 70%;
+    top: 4rem;
+    right: -6rem;
+    z-index: -1;
+}
+
+.superbun {
+    color: transparent;
+    background: var(--linear);
+    background-clip: text;
+}
+
+.explore__not-found__image__img {
+    width: 100%;
 }
 
 .explore__criteria {

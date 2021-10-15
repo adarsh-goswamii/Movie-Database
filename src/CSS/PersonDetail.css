@@ -1,0 +1,85 @@
+.person-detail {
+    width: 100%;
+    display: flex;
+    padding: 2rem;
+}
+
+.person-detail__personal-info {
+    width: 30%;
+}
+
+.person-detail__carrier {
+    width: 70%;
+}
+
+.person-detail__carrier__acting {
+    height: 80vh; /* remove it later */
+    width: 100%;
+    border: 1px solid #ddd;
+    margin-top: 1rem;
+    border-radius: .5rem;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2), 10px 10px 50px rgba(0, 0, 0, 0.2);
+}
+
+.person-detail__carrier__acting__row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.person-detail__carrier__acting__row__name {
+
+}
+
+.person-detail__carrier__acting__row__radio {
+    margin: 0rem 1rem;
+    width: .8rem;
+    height: .8rem;
+    border-radius: 50%;
+    border: 1px solid var(--black);
+    position: relative;
+}
+
+.person-detail__carrier__acting__row__radio:hover {
+    background-color: var(--primary);
+}
+
+.person-detail__carrier__acting__row__as {
+    margin: 0rem .5rem;
+    color: var(--grey-light);
+}
+
+.person-detail__carrier__acting__row__character {
+
+}
+
+.radio__submenu {
+    position: absolute;
+    width: 30rem;
+    height: 10rem;
+    background-color: var(--primary);
+    border-radius: .5rem;
+    bottom: -11rem;
+    left: -5rem;
+
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.radio__submenu::after {
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--primary);
+    content: '';
+    top: -.60rem;
+    left: 4.6rem;
+    transform: rotate(45deg);
+}
+
+.radio__submenu--active {
+    visibility: visible;
+    pointer-events: all;
+}

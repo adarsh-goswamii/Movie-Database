@@ -14,8 +14,6 @@ const Movie_card = ({ image_url, overview, id, movie_name, release_date }) => {
         release_date = `${date} ${month[parseInt(mon)]}, ${year}`;
     }
 
-    console.log(image_url);
-
     return (
         <div className="movie-card" key={id}>
             <div className="movie-card__container-shell">

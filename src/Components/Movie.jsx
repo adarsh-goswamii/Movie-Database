@@ -36,7 +36,7 @@ const Movie = (props) => {
         else setChecked(true);
     }
 
-    console.log(movie.data);
+    // console.log(movie.data);
     return (
         <section
             className="movie">

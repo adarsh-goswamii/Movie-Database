@@ -7,21 +7,22 @@ import '../CSS/Search.css';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import SearchIcon from '@mui/icons-material/Search';
+import superbun from '../IMAGES/superbun.jpg';
 
 const Search = (props) => {
     const [btnstate, setBtnState] = useState(false);
-    const [render, setRender] = useState(false);
     const [genres, setGenres] = useState([]);
     const [explore, setExplore] = useState({
         keyword: null,
         sort: 'popularity.desc',
         genre: new Set()
     });
+
     const [data, setData] = useState([]);
     const location = useLocation();
     const history = useHistory();
 
-    useEffect(() => {
+    useEffect(async () => {
         setBtnState(false);
         setGenres([]);
         setExplore({
@@ -35,12 +36,10 @@ const Search = (props) => {
         let tsort = query_params.get('sort');
         let tgenre = query_params.get('genre');
         let tkeyword = query_params.get('keyword');
-        // console.log('tgenre', tgenre.split(','));
+        // console.log('tgenre', tkeyword);
 
         if (tsort != null && tsort != undefined) setExplore(prev => ({ ...prev, sort: tsort }));
-        if (tgenre != null && tgenre != undefined && tgenre.length != 0) {
-            setExplore(prev => ({ ...prev, genre: new Set(tgenre.split(',')) }));
-        }
+        if (tgenre != null && tgenre != undefined && tgenre.length != 0) setExplore(prev => ({ ...prev, genre: new Set(tgenre.split(',')) }));
         if (tkeyword != null && tkeyword != undefined) setExplore(prev => ({ ...prev, keyword: tkeyword }));
 
         // ! GENRES
@@ -57,8 +56,7 @@ const Search = (props) => {
         for (let key of arr) var_genre = var_genre + key + ",";
         var_genre = var_genre.substring(0, var_genre.length - 1);
 
-
-        if (explore.keyword == null || explore.keyword == undefined) {
+        if (tkeyword == 'null' || tkeyword == undefined || tkeyword == null) {
             fetch(`https://api.themoviedb.org/3/discover/movie?api_key=d370300724b5dd3d75a44a46e93256c2&language=en-US&sort_by=${explore.sort}&include_adult=false&include_video=false&page=1&with_genres=${var_genre}&with_watch_monetization_types=flatrate`)
                 .then(data => data.json())
                 .then(({ results }) => {
@@ -67,7 +65,7 @@ const Search = (props) => {
                     });
                 });
         } else {
-            fetch(`https://api.themoviedb.org/3/search/movie?api_key=d370300724b5dd3d75a44a46e93256c2&language=en-US&query=${explore.keyword}&page=1&include_adult=false`)
+            fetch(`https://api.themoviedb.org/3/search/movie?api_key=d370300724b5dd3d75a44a46e93256c2&language=en-US&query=${tkeyword}&page=1&include_adult=false`)
                 .then(data => data.json())
                 .then(({ results }) => {
                     results.map(({ poster_path, id, title, overview, release_date }) => {
@@ -187,23 +185,38 @@ const Search = (props) => {
                 </div>
                 <div className="explore__data">
                     {
-                        data.map(({ title, id: key, poster_path: backdrop_path, overview, release_date }) => {
-                            return (
-                                <div
-                                    key={key}
-                                    className="search__container__card">
-                                    <Link to={`/movie/${key}`}>
-                                        <Movie_card
-                                            id={key}
-                                            movie_name={title}
-                                            overview={overview}
-                                            release_date={release_date}
-                                            image_url={`${props.image_url}${backdrop_path}`}
-                                        />
-                                    </Link>
+                        data.length == 0 ?
+                            <div className="explore__not-found">
+                                <div className="explore__not-found__data">
+                                    <h1 className="not-found__heading">Sorry! We could not found any results to your search.</h1>
+                                    <h1 className="not-found__sub-heading">Don’t Worry <span className="superbun">SUPERBUN</span> got you covered click on the explore button to choose from a list of movies and shows to watch.</h1>
+                                    <button
+                                        className="not-found__explore"
+                                        onClick={() => history.push('/Search??sort=popularity.desc&genre=&keyword=null')}
+                                        onSubmit={(e) => e.preventDefault()}>EXPLORE</button>
                                 </div>
-                            );
-                        })
+                                <div className="explore__not-found__image">
+                                    <img className="explore__not-found__image__img" src={superbun} alt="" />
+                                </div>
+                            </div>
+                            : // else 
+                            data.map(({ title, id: key, poster_path: backdrop_path, overview, release_date }) => {
+                                return (
+                                    <div
+                                        key={key}
+                                        className="search__container__card">
+                                        <Link to={`/movie/${key}`}>
+                                            <Movie_card
+                                                id={key}
+                                                movie_name={title}
+                                                overview={overview}
+                                                release_date={release_date}
+                                                image_url={`${props.image_url}${backdrop_path}`}
+                                            />
+                                        </Link>
+                                    </div>
+                                );
+                            })
                     }
                 </div>
                 <div

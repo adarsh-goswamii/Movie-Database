@@ -6,6 +6,7 @@ import MovieDetails from './pages/MovieDetails';
 import './index.css';
 import ShowDetail from './pages/ShowDetail';
 import Search from './pages/Search';
+import PersonDetail from './pages/PersonDetail';
 
 const API_key = 'd370300724b5dd3d75a44a46e93256c2';
 const image_url = 'https://image.tmdb.org/t/p/original/';
@@ -37,8 +38,14 @@ const Index = () => {
                         api_key= {API_key}
                         />
                 </Route>
+                <Route path="/PersonDetail">
+                    <PersonDetail
+                        image_url= {image_url}
+                        api_key= {API_key}
+                        />
+                </Route>
                 <Route path='/'>
-                    <Redirect to='/homepage'/>
+                    <Redirect to='/PersonDetail'/>
                 </Route>
             </Switch>
         </BrowserRouter>

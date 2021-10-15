@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import '../CSS/Poster.css';
+import { useHistory } from 'react-router-dom';
 
 const Poster = (props) => {
+    const [keyword, setKeyword]= useState('');
     const [image, setImage] = useState('');
+    const history= useHistory();
 
     // * Fetching popular movies from api for the background image.
     const popular_movies = async () => {
@@ -20,10 +23,16 @@ const Poster = (props) => {
     };
     popular_movies();
 
+    function handleKeyPressed(e) {
+        if (e.keyCode == 13) {
+            handleOnSubmit(e);
+        }
+    }
+
     function handleOnSubmit(e) {
         e.preventDefault();
-
-        // TODO: navigate to page where we can show a list of movies related to the search
+        // console.log("search");
+        history.push(`/Search?sort=popularity.desc&genre=&keyword=${keyword}`);
     }
 
     return (
@@ -35,12 +44,16 @@ const Poster = (props) => {
 
             <div className="hero__search">
                 <input 
+                onKeyUp={handleKeyPressed}
+                onChange={e=> setKeyword(e.target.value)}
                 placeholder="Search for Movies, Tv shows, person....."
                 type="text" 
                 className="hero__search__input" 
                 onSubmit={handleOnSubmit}/>
 
-                <div className="hero__search__button">
+                <div 
+                    onClick={handleOnSubmit}
+                    className="hero__search__button">
                     Search
                 </div>
             </div>

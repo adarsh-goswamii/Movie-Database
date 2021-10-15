@@ -12,6 +12,7 @@
     position: relative;
     flex-direction: column;
     overflow: hidden;
+    box-shadow:  10px 10px 50px rgba(255, 255, 255, .2);
 }
 
 
