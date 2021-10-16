@@ -22,9 +22,9 @@ const PersonDetail = (props) => {
         fetch(`https://api.themoviedb.org/3/person/${params.personId}/movie_credits?api_key=${props.api_key}&language=en-US`)
             .then(data => data.json())
             .then(({cast, crew}) => {
-                let new_cast= [], new_crew=[], set= new Set();
+                let new_cast= [], set= new Set();
                 for(let obj of cast) {
-                    if(set.has(obj.id) || obj.poster_path== null) continue;
+                    if(set.has(obj.id) || obj.poster_path== null || obj.release_date== undefined || obj.release_date== null ||obj.release_date.length<= 4) continue;
                     else {
                         new_cast.push(obj);
                         set.add(obj.id);
@@ -32,30 +32,27 @@ const PersonDetail = (props) => {
                 }
 
                 for(let obj of crew) {
-                    if(set.has(obj.id) || obj.poster_path== null) continue;
+                    if(set.has(obj.id) || obj.poster_path== null || obj.release_date== undefined || obj.release_date== null || obj.release_date.length<= 4) continue;
                     else {
-                        new_crew.push(obj);
+                        let { id, title, poster_path, release_date, overview, job: character } = obj;
+                        new_cast.push({ id, title, poster_path, release_date, overview, character });
                         set.add(obj.id);
                     }
                 }
                 
-                return {cast: new_cast, crew: new_crew};
-            })
-            .then(({ cast, crew }) => {
-                cast.map(obj => {
-                    let { id, title, poster_path, release_date, overview, character } = obj;
-                    setRoles(prev => [...prev, { id, title, poster_path, release_date, overview, character }]);
-                });
-                crew.map(obj => {
-                    let { id, title, poster_path, release_date, overview, job: character } = obj;
-                    setRoles(prev => [...prev, { id, title, poster_path, release_date, overview, character }]);
-                });
-            })
-            .then(()=> {
                 function compare(a, b) {
                     return b.release_date.localeCompare(a.release_date);
                 }
-                setRoles(prev=> [...prev.sort(compare)])
+
+                new_cast= new_cast.sort(compare);
+                console.log(new_cast);
+                return {new_cast};
+            })
+            .then(({ new_cast }) => {
+                new_cast.map(obj => {
+                    let { id, title, poster_path, release_date, overview, character } = obj;
+                    setRoles(prev => [...prev, { id, title, poster_path, release_date, overview, character }]);
+                });
             });
 
     }, [params]);
