@@ -183,7 +183,7 @@ const MovieDetails = (props) => {
                                                     id={id}
                                                     link={key}
                                                     movie_name={name}
-                                                    image_url={backdropReturn(counter)}
+                                                    image_url={props.image_url + backdrop[(counter++) % backdrop.length]}
                                                     play_video={playVideo} />
                                             </div>
                                         );

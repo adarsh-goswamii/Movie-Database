@@ -7,29 +7,56 @@ import '../CSS/PersonDetail.css';
 
 const PersonDetail = (props) => {
     let params = useParams();
-    let [known_for, setKnownFor] = useState([]);
+    let [detail, setDetail] = useState({});
     let [role, setRoles] = useState([]);
 
     useEffect(() => {
 
-        // fetch(`https://api.themoviedb.org/3/person/${params.personId}?api_key=${props.api_key}&language=en-US`)
-        //     .then(data => data.json())
-        //     .then(obj=> {
-        //         // let {}
-        //     });
+        fetch(`https://api.themoviedb.org/3/person/${params.personId}?api_key=${props.api_key}&language=en-US`)
+            .then(data => data.json())
+            .then(obj => {
+                let { id, biography, gender, birthday, known_for_department, name, place_of_birth, profile_path } = obj;
+                setDetail({ id, biography, gender, birthday, known_for_department, name, place_of_birth, profile_path });
+            });
 
-        // fetch(`https://api.themoviedb.org/3/person/${params.personId}/movie_credits?api_key=${props.api_key}&language=en-US`)
-        //     .then(data => data.json())
-        //     .then(({ cast, crew }) => {
-        //         cast.map(obj => {
-        //             let { id, title, poster_path, release_date, overview, character } = obj;
-        //             setRoles(prev => [...prev, { id, title, poster_path, release_date, overview, character }]);
-        //         });
-        //         crew.map(obj => {
-        //             let { id, title, poster_path, release_date, overview, job: character } = obj;
-        //             setRoles(prev => [...prev, { id, title, poster_path, release_date, overview, character }]);
-        //         });
-        //     });
+        fetch(`https://api.themoviedb.org/3/person/${params.personId}/movie_credits?api_key=${props.api_key}&language=en-US`)
+            .then(data => data.json())
+            .then(({cast, crew}) => {
+                let new_cast= [], new_crew=[], set= new Set();
+                for(let obj of cast) {
+                    if(set.has(obj.id) || obj.poster_path== null) continue;
+                    else {
+                        new_cast.push(obj);
+                        set.add(obj.id);
+                    }
+                }
+
+                for(let obj of crew) {
+                    if(set.has(obj.id) || obj.poster_path== null) continue;
+                    else {
+                        new_crew.push(obj);
+                        set.add(obj.id);
+                    }
+                }
+                
+                return {cast: new_cast, crew: new_crew};
+            })
+            .then(({ cast, crew }) => {
+                cast.map(obj => {
+                    let { id, title, poster_path, release_date, overview, character } = obj;
+                    setRoles(prev => [...prev, { id, title, poster_path, release_date, overview, character }]);
+                });
+                crew.map(obj => {
+                    let { id, title, poster_path, release_date, overview, job: character } = obj;
+                    setRoles(prev => [...prev, { id, title, poster_path, release_date, overview, character }]);
+                });
+            })
+            .then(()=> {
+                function compare(a, b) {
+                    return b.release_date.localeCompare(a.release_date);
+                }
+                setRoles(prev=> [...prev.sort(compare)])
+            });
 
     }, [params]);
 
@@ -41,25 +68,23 @@ const PersonDetail = (props) => {
     return (
         <>
             <Header />
-
             <div className="person-detail">
                 <div className="person-detail__personal-info">
                     <img
-                        className="personal-info__image"
-                        src=""
+                        className="person-detail__image"
+                        src={`${props.image_url}${detail.profile_path}`}
                         alt="" />
                 </div>
                 <div className="person-detail__carrier">
-                    <h1 className="person-detail__carrier__name">Jason Statham</h1>
+                    <h1 className="person-detail__carrier__name">{detail.name}</h1>
                     <h3 className="person-detail__carrier__sub-heading">Biography</h3>
-                    <p className="person-detail__carrier__biography">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem ullam deleniti, officia iure minus voluptatum asperiores maiores doloribus reprehenderit sint fuga odit, delectus minima molestias similique in repellendus accusamus magni?
-                        Cumque quia eaque inventore numquam error ad, temporibus beatae mollitia molestiae commodi, ex natus aliquam nostrum ipsum quidem aspernatur reprehenderit quod, blanditiis enim tempore fugiat. Labore, facilis. Beatae, reiciendis labore?</p>
+                    <p className="person-detail__carrier__biography">{detail.biography}</p>
                     <h3 className="person-detail__carrier__sub-heading">
                         Known For
                     </h3>
                     <div className="person-detail__carrier__known-for__container">
                         {
-                            known_for.map(({ title, id: key, poster_path: backdrop_path, overview, release_date }) => {
+                            role.map(({ title, id: key, poster_path: backdrop_path, overview, release_date }) => {
                                 return (
                                     <div
                                         key={key}
@@ -82,23 +107,43 @@ const PersonDetail = (props) => {
                         Acting
                     </h3>
                     <div className="person-detail__carrier__acting">
-                        <div className="person-detail__carrier__acting__row">
-                            <p className="person-detail__carrier__acting__row__year">2023</p>
-                            <div
-                                type="radio"
-                                onMouseEnter={handleMouseEnter}
-                                className="person-detail__carrier__acting__row__radio">
-                                <div
-                                    onMouseLeave={(e) => e.target.classList.remove('radio__submenu--active')}
-                                    className="radio__submenu">
-
-                                </div>
-                            </div>
-                            <p className="person-detail__carrier__acting__row__name"><b>Movie Name</b></p>
-                            <p className="person-detail__carrier__acting__row__as">as</p>
-                            <p className="person-detail__carrier__acting__row__character"><b>Character</b></p>
-                        </div>
-
+                        {
+                            role.map(({ id, title, poster_path, release_date, overview, character }) => {
+                                return (
+                                    <Link key={id} to={`/movie/${id}`}>
+                                        <div
+                                            key={id}
+                                            className="person-detail__carrier__acting__row">
+                                            <p className="person-detail__carrier__acting__row__year">{release_date}</p>
+                                            <div
+                                                type="radio"
+                                                onMouseEnter={handleMouseEnter}
+                                                onMouseLeave={(e) => {
+                                                    if (e.target.children.length >= 1)
+                                                        e.target.children[0].classList.remove('radio__submenu--active')
+                                                }}
+                                                className="person-detail__carrier__acting__row__radio">
+                                                <div
+                                                    onMouseLeave={(e) => e.target.classList.remove('radio__submenu--active')}
+                                                    className="radio__submenu">
+                                                    <img
+                                                        src={`${props.image_url}${poster_path}`}
+                                                        alt="Movie Poster"
+                                                        className="radio__submenu__image" />
+                                                    <div className="radio__submenu__detail">
+                                                        <h2 className="radio__submenu__detail__name">{title}</h2>
+                                                        <p className="radio__submenu__detail__overview">{overview}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p className="person-detail__carrier__acting__row__name"><b>{title}</b></p>
+                                            <p className="person-detail__carrier__acting__row__as">as</p>
+                                            <p className="person-detail__carrier__acting__row__character"><b>{character}</b></p>
+                                        </div>
+                                    </Link>
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </div>

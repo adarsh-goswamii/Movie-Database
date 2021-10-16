@@ -38,14 +38,14 @@ const Index = () => {
                         api_key= {API_key}
                         />
                 </Route>
-                <Route path="/PersonDetail">
+                <Route path="/PersonDetail/:personId">
                     <PersonDetail
                         image_url= {image_url}
                         api_key= {API_key}
                         />
                 </Route>
                 <Route path='/'>
-                    <Redirect to='/PersonDetail'/>
+                    <Redirect to='/homepage'/>
                 </Route>
             </Switch>
         </BrowserRouter>
