@@ -4,9 +4,10 @@ import Movie_card from "./Movie_card";
 import Toggle from "./Toggle";
 import Slider from './Slider';
 import '../CSS/Movie.css';
+import { useDispatch, useSelector } from "react-redux";
+import toggle_actions from '../store/ToggleSlice';
 
 const Trending = (props) => {
-    const [checked, setChecked] = useState(true);
     const [today, setToday] = useState({ loading: true, data: [] });
     const [week, setWeek] = useState({ loading: true, data: [] });
 
@@ -30,10 +31,8 @@ const Trending = (props) => {
             });
     }, []);
 
-    function handleState() {
-        if (checked) setChecked(false);
-        else setChecked(true);
-    }
+    const dispatch = useDispatch();
+    const { trending } = useSelector(state => state.Toggle);
 
     return (
         <section
@@ -42,13 +41,13 @@ const Trending = (props) => {
                 <h3 className="movie__heading">Trending</h3>
                 <Toggle
                     id="trending"
-                    click={handleState}
+                    click={() => dispatch(toggle_actions.trendingToggle())}
                     className="trending__toggle"
                     options={["Today", "This Week"]} />
             </div>
             <Slider key="trending" for="-trending">
                 {
-                    checked ?
+                    trending === "Today" ?
                         today.loading === true ? <p> LOADING </p> :
                             today.data.map(({ title, id: key, poster_path: backdrop_path, overview, release_date }) => {
                                 return (

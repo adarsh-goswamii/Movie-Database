@@ -5,7 +5,7 @@ export const slice = createSlice({
     initialState: {
         popular: "InTheatre",
         latestTrailer: "InTheatre",
-        trending: "today",
+        trending: "Today",
     },
 
     reducers: {
@@ -13,10 +13,10 @@ export const slice = createSlice({
             state.popular = state.popular === "InTheatre" ? "OnTV" : "InTheatre";
         },
         trailerToggle(state) {
-            state.latestTrailer = state.latestTrailer === "InTheatre" ? "OnTV" : "InTheatre";
+            state.latestTrailer = state.latestTrailer === "InTheatre" ? "Trending" : "InTheatre";
         },
         trendingToggle(state) {
-            state.trending = state.trending === "Today" ? "Today" : "This Week";
+            state.trending = state.trending === "Today" ? "This Week": "Today";
         }
     }
 });

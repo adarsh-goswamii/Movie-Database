@@ -43,7 +43,7 @@ const Movie = (props) => {
                     id="movie"
                     click={()=> dispatch(toggle_action.popularToggle()) }
                     className="movie__toggle"
-                    options={[ "InTheatres", "OnTV"]} />
+                    options={[ "In Theatres", "OnTV"]} />
             </div>
             <Slider key="movie" for="-movie">
                 {

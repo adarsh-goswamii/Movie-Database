@@ -3,11 +3,12 @@ import Trailer_card from './Trailer_card';
 import Toggle from './Toggle';
 import Slider from './Slider';
 import '../CSS/Trailer.css';
+import { useDispatch, useSelector } from 'react-redux';
+import toggle_actions from '../store/ToggleSlice';
 
 const Trailer = (props) => {
     let i = 0;
     let temp_popular = {};
-    const [checked, setChecked] = useState(false);
     const [theatre, setTheatre] = useState({ loading: true, data: [] });
     const [popular, setPopular] = useState({ loading: true, data: [] });
 
@@ -93,15 +94,11 @@ const Trailer = (props) => {
         "https://c4.wallpaperflare.com/wallpaper/308/457/73/penguins-of-madagascar-funny-movie-wallpaper-preview.jpg";
     poster2 = `url("${poster2}")`;
 
-    // console.log(poster);
+    const dispatch= useDispatch();
+    const { latestTrailer } = useSelector(state=> state.Toggle );
+    
     const someStyle = {
-        "--img-url": checked? poster: poster2
-    }
-
-    function handleState() {
-        console.log("Change State trailer");
-        if(checked) setChecked(false);
-        else setChecked(true);
+        "--img-url": latestTrailer=== "InTheatre" ? poster: poster2
     }
 
     return (
@@ -112,13 +109,13 @@ const Trailer = (props) => {
                 <h3 className="trailer__heading">Latest Trailers</h3>
                 <Toggle
                     id="trailer"
-                    click={handleState}
+                    click={()=> dispatch(toggle_actions.trailerToggle())}
                     className="trailer__toggle"
                     options={["In Threatres", "Trending"]} />
             </div>
             <Slider key="trailer" for="-trailer">
                 {
-                    checked === true ?
+                    latestTrailer === "InTheatre" ?
                         theatre.loading === true ? <p> LOADING </p> :
                             theatre.data.map(({ movie_name, id: key, backdrop_path, video_path }) => {
                                 return (
