@@ -21,7 +21,6 @@ const Header = () => {
                     { name: "Now Playing", link: '/Search?sort=popularity.desc&genre=&keyword=null' },
                     { name: "Upcoming", link: '/Search?sort=popularity.desc&genre=&keyword=null' },
                     { name: 'Top Rated', link: '/Search?sort=popularity.desc&genre=&keyword=null' }]}
-
                 />
                 <MenuItem
                     title="TV Shows"

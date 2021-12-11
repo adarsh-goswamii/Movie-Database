@@ -4,9 +4,10 @@ import Toggle from "./Toggle";
 import Slider from './Slider';
 import '../CSS/Movie.css';
 import { Link } from "react-router-dom";
+import toggle_action from '../store/ToggleSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Movie = (props) => {
-    const [checked, setChecked] = useState(true);
     const [movie, setMovie] = useState({ loading: true, data: [] });
     const [television, setTelevision] = useState({ loading: true, data: [] });
 
@@ -30,13 +31,9 @@ const Movie = (props) => {
             });
     }, []);
 
-    function handleState2() {
-        console.log("Change State Movie");
-        if (checked) setChecked(false);
-        else setChecked(true);
-    }
+    const dispatch= useDispatch();
+    const { popular } = useSelector(state=> state.Toggle );
 
-    // console.log(movie.data);
     return (
         <section
             className="movie">
@@ -44,13 +41,13 @@ const Movie = (props) => {
                 <h3 className="movie__heading">What's Popular</h3>
                 <Toggle
                     id="movie"
-                    click={handleState2}
+                    click={()=> dispatch(toggle_action.popularToggle()) }
                     className="movie__toggle"
-                    options={["In Theatres", "On TV"]} />
+                    options={[ "InTheatres", "OnTV"]} />
             </div>
             <Slider key="movie" for="-movie">
                 {
-                    checked ?
+                    popular=== "InTheatre" ?
                         movie.loading === true ? <p> LOADING </p> :
                             movie.data.map(({ title, id: key, poster_path: backdrop_path, overview, release_date }) => {
                                 return (

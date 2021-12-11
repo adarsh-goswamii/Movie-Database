@@ -7,48 +7,52 @@ import './index.css';
 import ShowDetail from './pages/ShowDetail';
 import Search from './pages/Search';
 import PersonDetail from './pages/PersonDetail';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 const API_key = 'd370300724b5dd3d75a44a46e93256c2';
 const image_url = 'https://image.tmdb.org/t/p/original/';
 const Index = () => {
     return (
-        <BrowserRouter>
-            <Switch>
-                <Route path='/homepage'>
-                    <Homepage
-                        api_key={API_key}
-                        image_url={image_url}
-                    />
-                </Route>
-                <Route path="/movie/:movieId">
-                    <MovieDetails
-                        api_key={API_key}
-                        image_url={image_url}
-                    />
-                </Route>
-                <Route path="/show/:showId">
-                    <ShowDetail
-                        api_key={API_key}
-                        image_url={image_url}
-                    />
-                </Route>
-                <Route path="/Search">
-                    <Search
-                        image_url= {image_url}
-                        api_key= {API_key}
+        <Provider store={store}>
+            <BrowserRouter>
+                <Switch>
+                    <Route path='/homepage'>
+                        <Homepage
+                            api_key={API_key}
+                            image_url={image_url}
                         />
-                </Route>
-                <Route path="/PersonDetail/:personId">
-                    <PersonDetail
-                        image_url= {image_url}
-                        api_key= {API_key}
+                    </Route>
+                    <Route path="/movie/:movieId">
+                        <MovieDetails
+                            api_key={API_key}
+                            image_url={image_url}
                         />
-                </Route>
-                <Route path='/'>
-                    <Redirect to='/homepage'/>
-                </Route>
-            </Switch>
-        </BrowserRouter>
+                    </Route>
+                    <Route path="/show/:showId">
+                        <ShowDetail
+                            api_key={API_key}
+                            image_url={image_url}
+                        />
+                    </Route>
+                    <Route path="/Search">
+                        <Search
+                            image_url={image_url}
+                            api_key={API_key}
+                        />
+                    </Route>
+                    <Route path="/PersonDetail/:personId">
+                        <PersonDetail
+                            image_url={image_url}
+                            api_key={API_key}
+                        />
+                    </Route>
+                    <Route path='/'>
+                        <Redirect to='/homepage' />
+                    </Route>
+                </Switch>
+            </BrowserRouter>
+        </Provider>
     );
 }
 
