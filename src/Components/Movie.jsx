@@ -6,29 +6,16 @@ import '../CSS/Movie.css';
 import { Link } from "react-router-dom";
 import toggle_action from '../store/ToggleSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { MovieData } from "../store/MovieFetch";
 
 const Movie = (props) => {
     const [movie, setMovie] = useState({ loading: true, data: [] });
     const [television, setTelevision] = useState({ loading: true, data: [] });
 
-    useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${props.api_key}&page=1`)
-            .then(data => data.json())
-            .then(({ results }) => {
-                results.map(({ id, poster_path, title, release_date, overview }) => {
-                    let temp = { id, poster_path, title, release_date, overview };
-                    setMovie(({ data }) => ({ loading: false, data: [...data, temp] }));
-                });
-            });
-
-        fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${props.api_key}&page=1`)
-            .then(data => data.json())
-            .then(({ results }) => {
-                results.map(({ id, poster_path, name, first_air_date, overview }) => {
-                    let temp = { id, poster_path, name, first_air_date, overview };
-                    setTelevision(({ data }) => ({ loading: false, data: [...data, temp] }));
-                });
-            });
+    useEffect( async() => {
+        let data= await MovieData(props.api_key)();
+        setMovie({ loading: false, data: data.movie });
+        setTelevision({ loading: false, data: data.television });
     }, []);
 
     const dispatch= useDispatch();
