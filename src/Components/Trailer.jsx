@@ -5,84 +5,17 @@ import Slider from './Slider';
 import '../CSS/Trailer.css';
 import { useDispatch, useSelector } from 'react-redux';
 import toggle_actions from '../store/ToggleSlice';
+import { TrailerData } from '../store/TrailerFetch';
 
 const Trailer = (props) => {
-    let i = 0;
-    let temp_popular = {};
     const [theatre, setTheatre] = useState({ loading: true, data: [] });
     const [popular, setPopular] = useState({ loading: true, data: [] });
 
-    useEffect(() => {
-        function get_theatre_movies() {
-            fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${props.api_key}&page=1`)
-                .then(data => data.json())
-                .then(({ results }) => {
-                    results.map(async (movie) => {
-                        // console.log("map iteration started");
-                        let video_path = await getVideos(movie.id);
-                        // console.log("Got the result from getVideos", video_path);
-                        const temp = {
-                            id: movie.id,
-                            movie_name: movie.title,
-                            backdrop_path: movie.backdrop_path,
-                            video_path: video_path
-                        };
-
-                        // console.log("temp", temp);
-                        setTheatre(({ data }) => {
-                            // console.log("data", data);
-                            return { loading: false, data: [...data, temp] }
-                        });
-                    });
-                });
-        }
-
-        function get_popular_movies() {
-            fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${props.api_key}&page=1`)
-                .then(data => data.json())
-                .then(({ results }) => {
-                    results.map(async (movie) => {
-                        // console.log("map iteration started");
-                        let video_path = await getVideos(movie.id);
-                        // console.log("Got the result from getVideos", video_path);
-                        const temp = {
-                            id: movie.id,
-                            backdrop_path: movie.backdrop_path,
-                            video_path: video_path,
-                            movie_name: movie.title
-                        };
-
-                        // console.log("temp", temp);
-                        setPopular(({ data }) => {
-                            // console.log("data", data);
-                            return { loading: false, data: [...data, temp] }
-                        });
-                    });
-                });
-        }
-
-        get_theatre_movies();
-        get_popular_movies();
+    useEffect(async() => {
+        let trailer_data= await TrailerData(props.api_key)();
+        setTheatre({ loading: false, data: trailer_data.theatre});
+        setPopular({ loading: false, data: trailer_data.trending});
     }, []);
-
-    // * Now when we have the movies id we can search for videos that where released on youtube.
-    async function getVideos(id) {
-        // console.log("get videos invoked");
-        let response = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${props.api_key}`)
-            .then((data) => data.json())
-            .then(({ results }) => {
-                for (let data of results) {
-                    // console.log(data);
-                    if (data.site === 'YouTube' && data.type === 'Trailer') {
-                        // console.log("value returned");
-                        return data.key;
-                    }
-                }
-            });
-
-        return response;
-    };
-
 
     let poster = theatre.data.length > 0 ?
         `${props.image_url}${theatre.data[0].backdrop_path}` :
