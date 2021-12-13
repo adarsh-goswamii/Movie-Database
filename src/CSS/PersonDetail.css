@@ -16,6 +16,7 @@
 
 .person-detail__carrier__acting {
     width: 100%;
+    overflow: hidden;
     border: 1px solid #ddd;
     margin-top: 1rem;
     border-radius: .5rem;
@@ -23,6 +24,7 @@
 }
 
 .person-detail__carrier__acting__row {
+    width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -98,6 +100,7 @@
     justify-content: flex-start;
     align-items: center;
     overflow-x: hidden;
+    width: 100%;
 }
 
 .person-detail__carrier__sub-heading {
@@ -132,4 +135,36 @@
 .radio__submenu ::-webkit-scrollbar-thumb {
     background: var(--grey-dark);
     border-radius: 10px;
+}
+
+@media only screen and (max-width: 1280px) {
+}
+
+@media only screen and (max-width: 1024px) {
+}
+
+@media only screen and (max-width: 832px) {
+    .person-detail {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+    }
+
+    .person-detail__personal-info {
+        width: 100%;
+    }
+
+    .person-detail__carrier {
+        width: 100%;
+    }
+
+    .person-detail__image {
+        width: 20rem;
+
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    
 }

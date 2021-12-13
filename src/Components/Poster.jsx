@@ -17,7 +17,7 @@ const Poster = (props) => {
                     setImage('https://wallpapercave.com/wp/wp2022711.jpg');
                 } else {
                     setImage(`${props.image_url}${results[0].backdrop_path}`);
-                    console.log(image);
+                    // console.log(image);
                 }
             });
     };

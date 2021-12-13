@@ -120,3 +120,59 @@
     justify-content: center;
     align-items: center;
 } 
+
+@media only screen and (max-width: 1280px) {
+}
+
+@media only screen and (max-width: 1024px) {
+}
+
+@media only screen and (max-width: 832px) {
+    .movie-card__container-shell {
+        width: 12rem;
+        height: 17rem;
+    }
+
+    .slider__container__card {
+        padding: 1.2rem;
+    }
+
+    .movie-card__container__back {
+        padding: 1.6rem;
+    }
+    
+    .movie-card__container__back__heading {
+        font-size: 1rem;
+    }
+    
+    .movie-card__container__back__date,
+    .movie-card__container__back__overview {
+        font-size: 0.8rem;
+        margin-bottom: .8rem;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .movie-card__container-shell {
+        width: 10rem;
+        height: 14rem;
+    }
+
+    .slider__container__card {
+        padding: .7rem;
+    }
+
+    .movie-card__container__back {
+        padding: 1.2rem;
+    }
+    
+    .movie-card__container__back__heading {
+        font-size: .8rem;
+    }
+    
+    .movie-card__container__back__date,
+    .movie-card__container__back__overview {
+        font-size: 0.6rem;
+        margin-bottom: .8rem;
+    }
+}

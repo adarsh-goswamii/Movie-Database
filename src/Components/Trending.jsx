@@ -14,7 +14,7 @@ const Trending = (props) => {
 
     useEffect(async() => {
         let trailer_data= await TrendingData(props.api_key)();
-        console.log(trailer_data);
+        // console.log(trailer_data);
         setToday({ loading: false, data: trailer_data.today });
         setWeek({ loading: false, data: trailer_data.week });
     }, []);

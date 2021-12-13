@@ -126,3 +126,33 @@
 .movie-detail__similar__heading {
     margin-bottom: 2rem;
 }
+
+@media only screen and (max-width: 1280px) {
+}
+
+@media only screen and (max-width: 1024px) {
+}
+
+@media only screen and (max-width: 832px) {
+    .movie-detail__hero__poster {
+        position: absolute;
+        pointer-events: none;
+        visibility: hidden;
+        top: 0;
+        right: 0;
+        z-index: -100;
+    }
+
+    .movie-detail__hero__info {
+        width: 100%;
+        padding: 0rem;
+    }
+
+    .movie-detail__hero__info__videos {
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    
+}
