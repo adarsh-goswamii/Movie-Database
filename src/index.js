@@ -13,6 +13,7 @@ import store from './store/store';
 const API_key = 'd370300724b5dd3d75a44a46e93256c2';
 const image_url = 'https://image.tmdb.org/t/p/original/';
 const Index = () => {
+    
     return (
         <Provider store={store}>
             <BrowserRouter>
